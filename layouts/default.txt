@@ -1,0 +1,46 @@
+---
+extension: html
+filter:
+  - haml
+  - basepath
+dirty:     true
+haml_options:
+  :format: :html4
+---
+!!! Strict
+%html{ :lang => "en" }
+  %head
+    %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
+    %title<
+      = h @page.title + " – Johan Kiviniemi’s series of tubes"
+    %link{ :href => "http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css", :rel => "stylesheet", :type => "text/css" }
+    %link{ :href => "http://yui.yahooapis.com/2.6.0/build/base/base-min.css", :rel => "stylesheet", :type => "text/css" }
+    %link{ :href => "/css/style.css", :rel => "stylesheet", :type => "text/css" }
+    %link{ :href => "/feed.xml", :rel => "alternate", :type => "application/atom+xml", :title => "Feed" }
+    - if @page.openid
+      %link{ :href => h(@page.openid), :rel => "openid.delegate" }
+      %link{ :href => h(@page.openid), :rel => "openid2.local_id" }
+    - if @page.openid_server
+      %link{ :href => h(@page.openid_server), :rel => "openid.server" }
+      %link{ :href => h(@page.openid_server), :rel => "openid2.provider" }
+    - if @page.openid_xrds_location
+      %meta{ "http-equiv" => "X-XRDS-Location", :content => h(@page.openid_xrds_location) }
+  %body
+    #doc2.yui-t5
+      #hd
+        %p.hidden<
+          %a{ :href => "#navigation" }<
+            Navigation
+      #bd
+        #yui-main
+          .yui-b
+            %h1<
+              %a{ :href => "/" }<
+                Johan Kiviniemi’s series of tubes
+            %h2<
+              = h @page.title
+            ~ @content
+        #sidebar.yui-b
+          ~ render :partial => '/sidebar'
+      #ft
+        / Footer goes here.

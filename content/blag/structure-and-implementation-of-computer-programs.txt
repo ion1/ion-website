@@ -1,0 +1,32 @@
+---
+title: Structure and Interpretation of Computer Programs
+created_at: 2007-02-13 02:47:37 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/02/13/structure-and-interpretation-of-computer-programs/
+filter:
+  - markdown
+---
+
+The [Structure and Interpretation of Computer Programs][lectures] video lectures by Hal Abelson and Gerald Jay Sussman, recorded in the 1980s, are absolutely fascinating.
+
+[lectures]: http://swiss.csail.mit.edu/classes/6.001/abelson-sussman-lectures/
+
+If you’re a programmer, you may learn new ideas and ways to think from those lectures, and become better at what you do.
+
+If you learned to program in the schools of today, you **will** learn new ideas and ways to think, and become better at what you do. ;-)
+
+Alas, some of the files contain a *very* muffled audio track.
+
+Using the command
+
+    mplayer -af equalizer=-12:-12:-12:0:0:0:12:12:-6:-12 Lecture-xx.avi
+
+to play them seems to help a lot. (See the [mplayer][] website.)
+
+[mplayer]: http://www.mplayerhq.hu/
+
+For other players with a graphic equalizer, this means
+
+*   canceling frequencies < 200 Hz (the overly emphasized bass frequencies)
+*   amplifying frequencies about 2 kHz – 4 kHz (including the consonants in speech)
+*   attenuating frequencies ≥ 8 kHz (the noise)
+

@@ -1,0 +1,36 @@
+---
+title: Ananasmurska – Excellence™
+created_at: 2006-12-25 22:48:27 +02:00
+old_url: http://johan.kiviniemi.name/blag/2006/12/26/excellence/
+filter:
+  - markdown
+---
+
+[Felor][] kindly captured a video of the realtime Excel™ demo Excellence™ by [Ananasmurska][].
+
+[felor]:        http://dailymodel.blogspot.com/
+[ananasmurska]: http://ananasmurska.org/
+
+The demo placed 1st in the BASIC demo competition at [Alternative Party][] 2004.
+
+[alternative party]: http://altparty.org/
+
+Stream the video at [Google Video][] or [download][] it.
+
+[google video]: http://video.google.com/videoplay?docid=-8670463511478827246
+[download]:     http://soijabanaani.net/tmp/ananasmurska/ananasmurska-excellence.avi
+
+<!--[if !IE]> -->
+<object type="application/x-shockwave-flash"
+  data="http://video.google.com/googleplayer.swf?docId=-8670463511478827246" width="400" height="326">
+<!-- <![endif]-->
+<!--[if IE]>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+  width="400" height="326">
+  <param name="movie" value="http://video.google.com/googleplayer.swf?docId=-8670463511478827246" />
+<!--><!---->
+  <p>Your browser doesn't seem to support the embedded video player. Click the link above to download the video.</p>
+</object>
+<!-- <![endif]-->
+

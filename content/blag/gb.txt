@@ -1,0 +1,37 @@
+---
+title: Definition of gb
+created_at: 2005-12-31 04:53:52 +02:00
+old_url: http://johan.kiviniemi.name/blag/2005/12/31/gb/
+filter:
+  - erb
+  - markdown
+---
+
+([Suomeksi / in Finnish](<%= h url_for_page(:name => 'gb.fi') %>))
+
+[Bit][] is the basic unit of information used in computing. A single bit can represent a value that is either true or false – one or zero.
+
+[bit]: http://en.wikipedia.org/wiki/Bit
+
+The amount of computer memory, such as [RAM][] and [harddisk][] space, is usually measured in bits or units derived from bit, such as [bytes][byte] (a byte is equal to 8 bits).
+
+[ram]:      http://en.wikipedia.org/wiki/Random_Access_Memory "Random Access Memory"
+[harddisk]: http://en.wikipedia.org/wiki/Hard_disk
+[byte]:     http://en.wikipedia.org/wiki/Byte
+
+For a long time that was all that was needed, but with recent new technologies the situation has changed.
+
+As the geekier ones of us already know, the latest innovation from the computer equipment manufacturers is a bit that can vary in weight. The technology is called *VWBS*, i.e. Variable-Weight Bit Storage. Previously all the bits in a single hard disk had the same weight. As the manufacturers were able to make lighter bits, the hard disks got physically smaller, and the amount of data that a single hard disk was able to store got larger.
+
+With VWBS, the exact amount of bits that a hard disk is able to store isn’t a constant anymore. Instead the weight of each bit stored affects the total amount of bits that the hard disk can hold. That’s why a new unit of memory capacity was adopted: the **grambit, `gb`**.
+
+`gb` is not to be mixed up with `GB` (gigabyte), which is often used to measure the capacity of a hard disk without VWBS technology.
+
+### A simplified example
+
+Let’s say we have a `100 gb` hard disk. If we use `0.10 ng` (nanogram) bits, we’re able to store `100 gb/(0.10 ng) = 1 000 Gb` (gigabit) of information to it. But if we use the lighter `0.08 ng` bits, we’re able to store `100 gb/(0.08 ng) = 1 250 Gb`.
+
+`1 000 Gb = 125 GB` and `1 250 Gb ≈ 156 GB`.
+
+If we have stored `500 Gb` of `0.08 ng` bits to a `100 gb` hard disk, the remaining capacity is `100 gb − (500 Gb · 0.08 ng) = 100 gb − 40 gb = 60 gb`.
+

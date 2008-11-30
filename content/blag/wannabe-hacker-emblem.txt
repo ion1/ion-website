@@ -1,0 +1,31 @@
+---
+title: Wannabe Hacker Emblem
+created_at: 2005-12-31 05:44:14 +02:00
+old_url: http://johan.kiviniemi.name/blag/2005/12/31/wannabe-hacker-emblem/
+filter:
+  - markdown
+---
+
+![Wannabe Hacker Emblem](http://johan.kiviniemi.name/pictures/humor/wannabe_hacker_emblem/original "Wannabe Hacker Emblem")
+
+Starfleet has the [Starfleet Command emblem][starfleet], Batman has [his logo][batman], Superman has [his logo][superman] and hackers have [the glider][glider]. What we haven’t had, historically, is an emblem that represents the *entire* wannabe hacker community – until now.
+
+[starfleet]: http://en.wikipedia.org/wiki/Image:Starfleet_command_emblem.png
+[batman]:    http://images.google.com/images?q=batman+logo
+[superman]:  http://images.google.com/images?q=superman+logo
+[glider]:    http://catb.org/hacker-emblem/
+
+All the wannabe hackers this idea was alpha-tested on instantaneously said “Wow! Cool!” without needing any further explanation.
+
+The emblem has became so popular that it has been added to the [Unicode][] standard: <span style="font-size: 200%; vertical-align: middle;">⠵</span> (U+2835).
+
+[unicode]: http://unicode.org/
+
+### What will I be saying if I display it?
+
+When you put the wannabe hacker emblem on your web page, or wear it on clothing, or display it in some other way, you are visibly associating yourself with the wannabe hacker culture. By using this emblem, you express sympathy with wannabe hackers’ goals, wannabe hackers’ values, and the wannabe hacker way of living.
+
+### How can I use it?
+
+The emblem is not copyrighted or trademarked. The recommended way to use it is on a web page, with an image or the Unicode character and a link back to this page.
+

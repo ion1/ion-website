@@ -1,0 +1,28 @@
+---
+extension: xml
+layout:    nil
+filter:    erb
+dirty:     true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Johan Kiviniemi’s series of tubes</title>
+  <link href="<%= h(Webby.site.base+@page.url) %>" rel="self" type="application/atom+xml"/>
+  <link href="<%= h(Webby.site.base+'/') %>" type="text/html"/>
+  <updated><%= Time.now.xmlschema %></updated>
+  <id><%= h(Webby.site.base+'/') %></id>
+  <% pages = @pages.find :all,
+                         :in_directory => 'blag',
+                         :sort_by => :created_at,
+                         :reverse => true
+     pages.each do |p|
+  -%>
+  <entry>
+    <title><%= h p.title %></title>
+    <link href="<%= h(Webby.site.base+p.url) %>"/>
+    <id><%= h(Webby.site.base+p.url) %></id>
+    <updated><%= p.created_at.xmlschema %></updated>
+    <content type="html"><%= h render(p) %></content>
+  </entry>
+  <% end -%>
+</feed>

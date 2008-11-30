@@ -1,0 +1,31 @@
+---
+title:      Home
+created_at: 2008-11-30 23:08:58.450805 +02:00
+filter:
+  - erb
+  - markdown
+dirty:      true
+
+openid:               "http://ion.openid.heh.fi/"
+openid_server:        "http://www.myopenid.com/server"
+openid_xrds_location: "http://www.myopenid.com/xrds?username=ion.openid.heh.fi"
+---
+You have entered Ion’s website. You are likely to be eaten by a grue.
+
+### Stuff
+
+* [My bookmarks](http://del.icio.us/jki)
+
+### Recent blag entries
+
+<% pages = @pages.find :limit => 5,
+                       :in_directory => 'blag',
+                       :sort_by => :created_at,
+                       :reverse => true
+   pages.each do |p|
+-%>
+<div class="box">
+  <h3><a href="<%= h p.url %>"><%= h p.title %></a></h3>
+  <%= render(p) %>
+</div>
+<% end -%>

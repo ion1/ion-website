@@ -1,0 +1,17 @@
+---
+title: Shameful confession
+created_at: 2007-11-08 16:09:58 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/11/08/shameful-confession/
+filter:
+  - markdown
+---
+
+I gave in to peer pressure and joined [Facepoop][]. ;-)
+
+Here’s [my profile][].
+
+[facepoop]:   http://www.facebook.com/
+[my profile]: http://www.facebook.com/people/Johan_Kiviniemi/635104511
+
+<p><a href="http://www.facebook.com/people/Johan_Kiviniemi/635104511" title="My Facebook profile"><img src="http://badge.facebook.com/badge/635104511.130.444689305.png" style="border: 0" alt="My Facebook profile"></a></p>
+

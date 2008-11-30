@@ -1,0 +1,44 @@
+---
+title: Syyt olla k{ytt{m{tt{ 8-bittisi{ merkist|j{
+created_at: 2006-01-03 00:57:55 +02:00
+old_url: http://johan.kiviniemi.name/blag/2006/01/03/anti-8bit/
+filter:
+  - markdown
+---
+
+Er{{t tahot ovat esitt{neet ISO-Latin-1:n (toiselta nimelt{{n ISO-8859-1) k{ytt||n siirtymist{ IRC:ss{ alkaen 1.1.1990, ja t{m{ ehdotus on esitetty "yhteisesti tehtyn{ sopimuksena". Todellisuudessa kyseess{ on kuitenkin muutaman yksitt{isen henkil{n mielipide, ja syit{ olla siirtym{tt{ viel{ Latin-1:n k{ytt||n l|ytyy lukuisia. K{yd{{np{ perusteluiden kera l{pi muutamia syit{ olla siirtym{tt{ viel{ Latin-1:een.
+
+### "Latin-1 -tuki on saatavilla useimpiin IRC-clientteihin" -v{ite
+
+Aloitetaan yleisimm{st{, eli irc:st{\. irc:i{ k{ytt{nee suurin osa irkkaajista, ja se lienee yleisin juuri niiden irkkaajien keskuudessa jotka eiv{t ole kovin teknisesti orientoituneita. Kaveri on vain opastanut miten asennetaan ohjelma "jolla p{{st{{n sinne irkkiin". irc ei tue vakiona Latin-1 -merkist|{, eik{ tule sit{ viel{ v{h{{n aikaan tukemaankaan. Jonkinlainen Latin-1 -tuki on saatavilla skriptien muodossa, mutta moniko n{ist{ perusk{ytt{jist{ osaa hakea/asentaa/k{ytt{{ moisia? Ohjeiden julkaisu ei juuri asiaa auta, moni n{ist{ k{ytt{jist{ ei niit{ osaa hakea eik{ osaa/jaksa soveltaa. Lis{ksi irc:n Latin-1 -skripteist{ on raportoitu erilaisia toimintaongelmia.
+
+Sitten toinen yleinen, ircII. Kuten Latin-1:n kannattajat v{itt{v{tkin, uusin versio ircII:st{ todellakin tukee kunnolla Latin-1:t{\. Valitettavasti sit{ ei kuitenkaan viel{ saa asennettua suoraan yleisimpien k{ytt|j{rjestelmien pakettienhallinnan avulla. Esimerkiksi HP-UX:st{ l|ytyy kyll{ experimental -paketti uusimmasta ircII:st{, mutta vakaana ainoastaan vanhempi versio. Sama p{tee 4.3BSD:hen, stablesta ei viel{ uusinta ircII:t{ saa. Experimental -pakettien asennus tuotantopalvelimiin (esimerkiksi shell-palveluntarjoajat) taas ei todellakaan ole vaihtoehto, niill{ kun on mahdollista saada aikaan mit{ moninaisimpia ongelmia. My|sk{{n ircII:n k{{nt| koneisiin l{hdekoodeista ohi pakettienhallinnan ei ole vaihtoehto. Pakettienhallinnan ohittamisella aiheutetaan vain lis{{ ongelmia itselle tulevaisuudessa.
+
+Mainittakoon lis{ksi viel{ ett{ ircII:nkin Latin-1 -tuen k{ytt||notto ja uuden ircII:n asentaminen vaativat jonkin verran osaamista. Kaikilla perusk{ytt{jill{ ei sit{ ole, vaan ircII on esimerkiksi asentunut distribuution mukana ilman ett{ k{ytt{j{ olisi juuri vaivaa joutunut sen eteen n{kem{{n. On varmasti monia k{ytt{ji{ joilla ei ole aikaa, halua tai osaamista alkaa n{hd{ ylim{{r{ist{ vaivaa Latin-1:n k{ytt||noton eteen. Lis{ksi Latin-1:n k{ytt||notto saattaa vaatia asetusten muutoksia my|s paikallisella koneella, joka vaatii taas hieman enemm{n osaamista k{ytt{j{lt{\.
+
+### Latin-1 -merkist|n k{yt|n "hy|dyt"
+
+Mit{ todellista hy|ty{ Latin-1:st{ sitten normaalik{ytt{j{lle olisi? Er{{t harvoin k{ytetyt merkit, kuten tietyt skandinaaviset "{{kk|set" n{kyisiv{t oikein vanhoihin 7-bittisiin merkist|ihin verrattuna. Kuinka moni k{ytt{j{ todella voi sanoa tarvitsevansa niit{? Jokaiselle n{ist{ merkeist{ on kuitenkin olemassa t{ysin toimiva korvike. Mik{{n ei esimerkiksi est{ kirjoittamasta skandeja korvaavilla merkeill{ (kuten { ja | tai d ja v) ja t{m{ saattaa olla joissakin tilanteissa jopa selke{mp{{\.
+
+Toinen Latin-1:n etu on mm. monien matemaattisten symbolien ja valuuttamerkkien k{ytt|mahdollisuus. Moniko irkkaaja kuitenkaan tarvitsee esimerkiksi astemerkki{ tai 1/2 -merkki{? Ehk{ joku, mutta harvassa lienev{t suomalaisten irkkaajien keskuudessa.
+
+### Latin-1 -tuki fonteissa
+
+Miljoonat ja taas miljoonat tietokoneissa olevat olevat fontit eiv{t toimi 8-bittisten merkist|jen kanssa sit{k{{n v{h{{ mit{ ne toimivat 7-bittisten merkist|jen kanssa.
+
+### Vanhempien ohjelmistojen ja laitteiden tuki Latin-1:lle
+
+Lukuisat vanhat ohjelmat eiv{t 8-bittisten merkist|jen p{{lle ymm{rr{\. Jos koneelta v{{nt{{ merkist|n Latin-1:ksi, kyseiset softat eiv{t toimi tai n{ytt{v{t ep{m{{r{ist{ merkkisotkua. Koska useimmiten kyseess{ ovat vanhat ohjelmat, joita ei en{{ aktiivisesti kehitet{, eik{ niist{ v{ltt{m{tt{ ole saatavilla l{hdekoodiakaan, ongelman korjaamiseen ei ole mahdollisuutta. Joissakin tilanteissa kyseisten ohjelmistojen k{ytt||n kuitenkin on pakottavia syit{\.
+
+My|sk{{n monet vanhat k{ytt|j{rjestelm{t, joita yh{ saattaa olla tuotantok{yt|ss{, eiv{t Latin-1:n p{{lle ymm{rr{ mit{{n. N{in ollen k{ytt{j{t joutuisivat koneensa asetukset Latin-1 -aikaan v{{nnetty{{n n{kem{{n turhaa lis{vaivaa n{iden j{rjestelmien et{k{yt|n yhteydess{\.
+
+N{m{ syyt kuitenkin koskettavat harvempaa k{ytt{j{{, joten niiden painoarvo ei niin suuri ole.
+
+### Yhteenvetoa
+
+Kyll{, 8-bittiset merkist|t ovat hieno asia ja tulevat varmasti helpottamaan tulevaisuudessa jokaisen meist{ el{m{{ v{hent{m{ll{ yhteensopivuusongelmia eri j{rjestelmiss{ k{ytett{vien merkist|jen v{lill{\. T{m{n hetken tilanne on kuitenkin viel{ se, ett{ Latin-1:n k{ytt{minen vaatii ylim{{r{ist{ virittely{ tai riskien ottoa testausvaiheessa olevien ohjelmistojen kanssa, ja kaikkien ohjelmien tai k{ytt|j{rjestelmien kanssa sen k{ytt| ei ole edes mahdollista.
+
+Palataan asiaan, kun Latin-1:n k{ytt||notto on oikeasti suurimmalle osalle k{ytt{jist{ mahdollista vain muutaman, helposti opastettavan komennon kautta, ellei jopa oletusarvona k{ytt|j{rjestelmiss{ ja ohjelmissa, my|s IRC-clienteiss{\. N{in tulee varmasti tapahtumaan muutamien vuosien kuluessa nykyhetkest{\.
+
+Siihen asti, 8-bittisi{ merkkej{ irkkiin suoltavat saavat ainakin allekirjoittaneen toimesta kehotuksen korjata merkist|ns{, ja tarvittaessa keng{nkuvan takalistoonsa. Samaa suosittelen muillekin.
+

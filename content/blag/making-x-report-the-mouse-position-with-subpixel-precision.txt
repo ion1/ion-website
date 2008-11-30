@@ -1,0 +1,65 @@
+---
+title: Making X report the mouse position with subpixel precision
+created_at: 2007-02-23 17:20:23 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/02/23/making-x-report-the-mouse-position-with-subpixel-precision/
+filter:
+  - markdown
+---
+
+The precision of mice is generally much better than the precision of screens. I’m not very familiar with the internals of X, but AFAIK it only reports the mouse position to clients at the screen’s precision.
+
+My modest proposal is to make it possible for X clients to know the mouse position with subpixel precision via an extension.
+
+As I’m surely not the only one who has had this idea, perhaps it’s already being designed or even implemented. If that is the case, please excuse my ignorance :-). Otherwise, I hope this idea reaches the [Xorg][] folks.
+
+[xorg]: http://x.org/
+
+(I started a [discussion][] about this at the Xorg mailing list.)
+
+[discussion]: http://lists.freedesktop.org/archives/xorg/2007-February/022092.html
+
+The feature would have a couple of benefits:
+
+
+*   Scrollbars
+
+    On a long page, a single pixel of scrollbar movement may cause the content to scroll a huge amount. The entire design of scrollbars could be better, but even with the current design, subpixel accuracy would make it easier to control the scrolling.
+    
+    GUI toolkits such as Gtk and Qt would have to be modified to support this feature.
+
+*   Transformed windows
+
+    With some recent [changes][], it’s possible for a window to have an arbitrary coordinate map, to which input events are transformed. This allows windows to be e.g. scaled or rotated in three dimensions and still receive input correctly.
+
+    Is the coordinate transformation going to happen from the screen’s pixel grid? If a window is scaled down, that would mean that all its pixels might not be reachable.
+
+    If the transformed mouse position is calculated from the subpixel screen coordinates, this problem would vanish.
+
+*   Image processing
+
+    In programs such as [GIMP][], there are obvious benefits from being able to draw and move things with subpixel precision, especially if the image has been zoomed out.
+
+*   Others
+
+    There are many other programs that can benefit from this feature: 3D modeling software, games, screen magnification, you name it.
+
+[changes]: http://lists.freedesktop.org/archives/xorg/2007-February/021515.html
+[gimp]:    http://gimp.org/ "The GNU Image Manipulation Program"
+
+### Implementation
+
+First of all, the X server would need to handle mouse coordinates internally as floating-point numbers, not integers. The screen can be thought as if it consisted of X·Y rectangles, all of which are the size of the corresponding pixel.
+
+On a 1600×1200 screen, the internal coordinates would satisfy 
+
+*   0.0 ≤ x < 1600.0
+*   0.0 ≤ y < 1200.0
+
+Temporarily ignoring acceleration, it would be very simple to assume or query the DPI value(s) for the mouse/mice and assume or query the DPI value(s) for the display(s). As I mentioned earlier, the former is generally much higher than the latter.
+
+Floating-point movement of the mouse can then be converted to the floating-point screen coordinates very easily using the DPI ratio. The implementation of acceleration on top of that shouldn’t be any trouble either.
+
+Of course, normal X clients (that don’t need to care about the floating-point coordinates) would receive the coordinates rounded to the “current” pixel’s integer coordinates (simple number truncation).
+
+Things like only sending motion notifications when the cursor crosses a pixel boundary have to be thought about, but they shouldn’t be a problem.
+

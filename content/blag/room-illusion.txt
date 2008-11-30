@@ -1,0 +1,54 @@
+---
+title: A room illusion with POV-Ray
+created_at: 2007-01-14 23:19:55 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/01/15/room-illusion/
+filter:
+  - markdown
+---
+
+I’ve been planning to model a 3D scene and paint it to my bedroom walls, ceiling and floor so that the three-dimensional surroundings are apparent if you look at the room from the correct position.
+
+Finally I got around to testing what it would take to render the images that should be painted to the walls.
+
+It was quite simple, actually.
+
+### The original scene
+
+First create a scene normally. Choose the camera position, that’s the position from where the illusion will work.
+
+Then imagine an accurate model of the room around the camera. I chose the camera position to be at the door. I can ignore the wall adjacent to the door, so I’ll need to generate five textures: the wall opposite to the door, the walls to the left and to the right, the ceiling and the floor.
+
+To generate the textures, here’s a [POV-Ray macro I came up with][render_plane]. It sets the camera so that the [image plane][] is equal to an imaginary plane (one of the walls).
+
+[image plane]:  http://povray.org/documentation/images/reference/perspcam.gif
+[render_plane]: http://johan.kiviniemi.name/stuff/povray/render_plane.inc
+
+For example, if the camera position is `<0,1.8,-2.5>` and the floor is imagined to be `box { <-4,0,-2.5> <4,0,2.5> }`, you’d render the corresponding texture with
+
+    Render_Plane_From(<0,1.8,-2.5>, <0,0,0>, <8,0,0>, <0,0,5>)
+
+where `<0,0,0>` is the center of the plane, `<8,0,0>` is the “right” vector and `<0,0,5>` is the “up” vector.
+
+### The test scene
+
+Next, create an actual model of the room to test the textures that were created. Just create the planes and apply the textures to them.
+
+Remember: the camera position must be exactly the same as it was in the original scene for the illusion to work. The direction and the angle do not matter.
+
+The following images demonstrate the effect. One is from the correct camera position and the other is from a “wrong” camera position. Ignore the ugly original scene, it was just hastily thrown together to test this technique.
+
+<div class="clearfix">
+  <div class="thumbnail">
+    <a class="lightbox" href="http://johan.kiviniemi.name/pictures/misc/room-illusion/room-right_position/original" title="Room (right camera position)"><img src="http://johan.kiviniemi.name/pictures/misc/room-illusion/room-right_position/thumbnail" alt="Room (right camera position)" /></a>          
+  </div>
+  <div class="thumbnail">
+    <a class="lightbox" href="http://johan.kiviniemi.name/pictures/misc/room-illusion/room-wrong_position/original" title="Room (wrong camera position)"><img src="http://johan.kiviniemi.name/pictures/misc/room-illusion/room-wrong_position/thumbnail" alt="Room (wrong camera position)" /></a>          
+  </div>
+</div>
+
+Check out the [video][].
+
+[video]: http://soijabanaani.net/tmp/room-test1.avi
+
+I’m probably not going to manage to model a good-looking scene and paint it to the room any time soon, but at least now I know how to do it. :-)
+

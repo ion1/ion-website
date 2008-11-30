@@ -1,0 +1,270 @@
+---
+title: Ruby vs. Python (suomeksi)
+created_at: 2006-12-10 00:26:45 +02:00
+old_url: http://johan.kiviniemi.name/blag/2006/12/10/ruby-vs-python.fi/
+filter:
+  - erb
+  - markdown
+---
+
+([In English](<%= h url_for_page(:name => 'ruby-vs-python') %>))
+
+Pidin aikoinaan Pythonia miellyttävimpänä niistä tulkattavista kielistä, joihin olin tutustunut. Sitten tutustuin Rubyyn – ja sitä miellyttävämpää kieltä en ole vielä löytänyt. Tällä sivulla on perusteluita mielipiteelleni.
+
+Ennen kuin siirryn asiaan, on paras mainita, että Ruby <em>on</em> tällä hetkellä hitaampi kuin Python. Toisaalta Python on hitaampi kuin C. Ehkä Ruby soveltuu parhaiten projektillesi, ehkä ei.
+
+Itse en ole vielä törmännyt tilanteeseen, jossa Ruby ei olisi riittävän nopea. YMMV. Huomaa myös, että on helppo kirjoittaa pullonkaulat uudelleen C:llä profiloituaan koodin.
+
+### Yksityiset metodit ja muuttujat
+
+Saadakseen Pythonissa metodit ja instanssimuuttujat yksityisiksi, joutuu **aina** kirjoittamaan `__` nimen eteen. Rubyssä instanssimuuttujat ovat vakiona yksityisiä. `private`-metodikutsun jälkeen määritellyt metodit ovat yksityisiä.
+
+### Funktiot ja metodit
+
+Rubyssä ei ole erikseen funktioita ja metodeja; kaikki ovat metodeja. Esimerkkinä Pythonissa `len()` on funktio, mutta `items()` on metodi. Tällaiset epäkonsistentit ratkaisut tuovat mieleen [PHP:n][php], *\*hrrr\**.
+
+[php]: http://tnx.nl/php.jpg "PHP – Training wheels without the bike"
+
+Python:
+
+    string = 'Hello world'
+    print string.count('o'), len(string)  # prints 2, 11 – why not string.len()?
+
+Ruby:
+
+    string = 'Hello world'
+    puts string.count('o'), string.length  # prints 2, 11
+
+### ”`self`”
+
+Pythonissa metodin määrittelyn ensimmäiseksi parametriksi joutuu kirjoittamaan `self` Perl-tyyliin. Kaiken lisäksi Python ei edes vaadi kyseisen muuttujan nimen olevan `self`, se voi olla Pythonin puolesta vaikka `kakka_rules`. Rubyssä `self` on samalla lailla automaattisesti saatavilla kuin C++:ssa `this`.
+
+Lisäksi metodikutsun `self.method` voi lyhentää muotoon `method`, koska `self` on vakio-”receiver”.
+
+### Instanssimuuttujien merkintä
+
+Pythonissa yksityiset instanssimuuttujat joutuu kirjoittamaan turhauttavan pitkässä muodossa `self.__foobar`. Rubyssä muoto on `@foobar`.
+
+Monet python-ohjelmoijat, joiden kanssa olen keskustellut, sortuvat vain päästäkseen vähemmällä kirjoittamisella tekemään sellaisista muuttujista (ja metodeista) julkisia, joilla ei olisi mitään syytä olla julkisia. Sitten he sanovat, että se on hyvä asia, ”the Python way”. No, heillä on oikeus mielipiteeseensä.
+
+### Rubyssä ”everything is an object”
+
+Jopa numerot. Se mahdollistaa seuraavankaltaisten asioiden tekemisen:
+
+    4.megabytes > 2345.kilobytes          # ⇒ true
+
+Tai:
+
+    3.weeks.ago                           # ⇒ Sun Nov 19 09:39:05 EET 2006
+
+Edellisen esimerkin `Numeric#weeks` on määritelty seuraavasti: `self * 7.days`. Voinet arvata, miten `Numeric#days`, `#hours` jne. ovat määritelty. :-)
+
+`Numeric#ago` on `Time.now - self`, ts. se palauttaa `Time`-olion.
+
+### Koodiblokit
+
+Rubyssä on *todella* nätti syntaksi koodiblokin antamiseen parametriksi metodikutsulle (ks. myös [closure][]; funktioviittaus [ei ole yhtä kuin closure][python-closure]).
+
+[closure]: http://martinfowler.com/bliki/Closure.html
+[python-closure]: http://mail.python.org/pipermail/python-list/2004-July/270951.html
+
+Kuvitteellinen esimerkki:
+
+    time_tomorrow = TimeTravel.travel(1.day.from_now) { Time.now }
+
+Meillä on metodi `TimeTravel.travel`, jolle annetaan parametreiksi **ajankohta** sekä **koodiblokki**. Metodi voi tehdä mitä tahansa haluaa saamallaan blokilla: suorittaa jotakin ja ajaa sitten blokin; suorittaa blokin moneen kertaan; laittaa blokin talteen myöhempää suoritusta varten jne.
+
+Tässä tapauksessa metodi matkustaa aikakoneella määriteltyyn aikaan, suorittaa
+sitten blokin ja lopuksi palauttaa blokin palauttaman arvon.
+
+Tässä esimerkissä blokki palauttaa `Time.now`, joka päätyy `time_tomorrow`-muuttujaan.
+
+Mahdollisuus antaa blokki metodikutsulle tarjoaa tehokkaan tavan tehdä monia asioita. Kätevä syntaksi tekee siitä kivaa.
+
+#### Ensimmäinen tosielämän esimerkki: `each`
+
+Useat luokat, kuten sisäänrakennetut [Array][], [Hash][], [IO][] ja [Dir][], toteuttavat `each`-metodin. Se yksinkertaisesti iteroi sen yli, mitä olio sattuu ”sisältämään”, suorittaen annetun blokin kerran jokaista elementtiä kohti.
+
+[array]: http://ruby-doc.org/core/classes/Array.html
+[hash]:  http://ruby-doc.org/core/classes/Hash.html
+[io]:    http://ruby-doc.org/core/classes/IO.html
+[dir]:   http://ruby-doc.org/core/classes/Dir.html
+
+`Array#each` iteroi taulukon elementtien yli. `Hash#each` iteroi avain/arvo-parien yli. `IO#each` iteroi `IO`-olion vastaanottamien rivien yli (avoimesta tiedostosta, HTTP-yhteydestä jne). `Dir#each` iteroi hakemistolistauksen yli sitä mukaa, kun sitä vastaanotetaan.
+
+    # Iterate over the elements of an array.
+    [42, 'blah', Time.now].each do |element|
+      puts element
+    end
+    
+    # Iterate over the file line by line.
+    open('filename').each do |line|
+      puts line
+    end
+
+Saatat miettiä, mitä hyötyä on `each`ista, kun voisi vain käyttää `for`-rakennetta useiden muiden kielien tapaan.
+
+Rubyssä on sisäänrakennettu [mixin][] nimeltään [Enumerable][]. Voit sisällyttää sen mihin tahansa luokkaan `include`-metodilla, ja jos luokkasi määrittelee `each`-metodin, saat nipun erittäin käytännöllisiä metodeja ”ilmaiseksi”:
+
+[mixin]:      http://en.wikipedia.org/wiki/Mixin
+[enumerable]: http://ruby-doc.org/core/classes/Enumerable.html
+
+*   `array.all? {|item| item < 42 }` palauttaa arvon `true`, jos jokainen taulukon elementti on pienempi kuin 42.
+*   `dir.any? {|filename| filename =~ /foo/ }` palauttaa arvon `true`, jos mikä tahansa tiedostonimi hakemistossa sisältää tekstin ”foo”.
+*   `object.each_with_index {|item, i| puts "Item number #{i}: #{item}" }` – each\\_with\\_index on kuin each, mutta se antaa blokille lisäksi kokonaislukuparametrin, alkaen nollasta.
+*   `books.sort_by {|book| book.author }` palauttaa listan kirjoista aakkostettuna kirjoittajan nimen mukaan.
+*   jne. jne.
+
+#### Muita esimerkkejä
+
+##### Tiedostot
+
+Voit antaa blokin `open`-kutsulle:
+
+    open 'filename', 'w' do |io|
+      io.puts "Hello world!"
+    end
+
+Kun `open`-metodia kutsutaan blokin kanssa, se
+
+*   avaa tiedoston
+*   suorittaa blokin antaen IO-olion parametriksi
+*   sulkee tiedoston – **tästä ei tarvi huolehtia käsin**
+*   palauttaa blokin palauttaman arvon
+
+Sanotaan, että haluamme variantin open-metodista, joka
+
+*   annetun tiedostonimen sijaan **avaa väliaikaisen tiedoston kirjoitusta varten**
+*   suorittaa blokin antaen IO-olion parametriksi
+*   sulkee tiedoston
+*   jos blokki suoritettiin onnistuneesti,
+    *   **siirtää väliaikaistiedoston kohdetiedoston tilalle** ja palauttaa blokin paluuarvon,
+    *   muussa tapauksessa poistaa väliaikaistiedoston ja heittää exceptionin eteenpäin kutsujalle
+
+Arvaatko, kuinka paljon erilainen kyseinen metodikutsu olisi, kun hyödynnämme blokkeja?
+
+    Tempfile.open_auto_rename 'filename' do |io|
+      io.puts "Hello world!"
+    end
+
+Siinä se.
+
+##### Säikeet
+
+Jos [säikeet][thread] ovat sinulle tuttuja, tulet huomaamaan, että blokit ovat luontainen tapa luoda niitä.
+
+[thread]: http://ruby-doc.org/core/classes/Thread.html
+
+    my_thread = Thread.new do
+      puts  "This code is running in a thread."
+      sleep 10
+      puts  "Slept for a while."
+    end
+    
+    # Now we can control the thread using the my_thread object.
+
+##### Yksikkötestaus
+
+[RSpec][]-yksikkötestausjärjestelmää käytettäessä määritellään testit seuraavalla syntaksilla. Huomaa, että jokainen `do`...`end`-pätkä on blokki.
+
+[rspec]: http://rspec.rubyforge.org/
+
+    context "Book" do
+      setup do
+        @book = Book.new :author => "Douglas Adams",
+                         :title  => "The Hitchhiker's Guide to the Galaxy",
+                         :year   => 1979
+      end
+    
+      specify "should have the correct author" do
+        @book.author.should == "Douglas Adams"
+      end
+    
+      specify "should have the correct title" do
+        @book.title.should == "The Hitchhiker's Guide to the Galaxy"
+      end
+    
+      specify "should have the correct year" do
+        @book.year.should == 1979
+      end
+    
+      specify "should not have an ISBN" do
+        @book.isbn.should == nil
+      end
+    
+      specify "should be able to add the ISBN" do
+        isbn = '0-330-25864-8' 
+    
+        @book.isbn        =  isbn
+        @book.isbn.should == isbn
+      end
+    
+      specify "should not be able to burn the book" do
+        lambda { @book.burn! }.should_raise Book::DoesNotCatchFireError
+      end
+    end
+
+Tuloste näyttää tältä:
+
+<blockquote class="rspec">
+<ul>
+<li>Book
+  <ul>
+  <li class="success">should have the correct author</li>
+  <li class="success">should have the correct title</li>
+  <li class="success">should have the correct year</li>
+  <li class="success">should not have an ISBN</li>
+  <li class="success">should be able to add the ISBN</li>
+  <li class="success">should not be able to burn the book</li>
+  </ul>
+</li>
+</ul>
+<p>Finished in 0.025893 seconds</p>
+<p class="success">6 specifications, 0 failures</p>
+</blockquote>
+
+##### Mechanize
+
+[WWW::Mechanize][mechanize] on **todella** kiva luokka tiedon keräämiseen web-palveluiden sisällöstä ([screen scraping][]).
+
+[mechanize]:       http://rubyforge.org/projects/mechanize
+[screen scraping]: http://en.wikipedia.org/wiki/Screen_scraping
+
+Taannoin kaipasin tapaa käskeä Mechanizea palaamaan tietylle sivulle sivuhistoriassa sekalaisten linkkien klikkaamisen ja mahdollisesti exceptionin heittävän koodin suorittamisen jälkeen.
+
+Kirjoitin `transact`-nimisen metodin, joka – yllätys – hyödyntää blokkeja.
+
+Esimerkki sen käytöstä:
+
+    get "http://example.net/video_index.html"
+    
+    # Find all links starting with "Video:"
+    page.links.text(/^Video:/).each do |link|
+      begin
+        transact do
+          click link  # Example: http://example.net/videos/ruby_on_rails.html
+    
+          # From the resulting page, find the actual download link.
+          video_link = page.links.text('Download this video').first
+          filename   = File.basename video_link.href
+    
+          download video_link, filename
+        end
+    
+      rescue => e
+        log.error "Failed to download from #{link.href}: #{e.class}: #{e}"
+      end
+    end
+
+Blokin jälkeen olemme automaattisesti palanneet videolistan pääsivulle siitä riippumatta, suoritettiinko transactille annettu koodi onnistuneesti vai heittikö se mahdollisesti exceptionin.
+
+Toisin sanoen olemme valmiit klikkaamaan taas seuraavaa videolinkkiä listasta.
+
+### Loppusanat
+
+Rubyssä on paljon asioita, jotka tekevät ohjelmoinnista mukavaa. Suosittelen vilpittömästi siihen tutustumista.
+
+Muuten, tässä on [TimeTravel-luokan toteutus][timetravel]. ;-)
+
+[timetravel]: http://johan.kiviniemi.name/stuff/ruby/acme/timetravel.html
+

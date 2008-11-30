@@ -1,0 +1,37 @@
+---
+title: Yksikön gb määritelmä
+created_at: 2005-12-31 04:54:07 +02:00
+old_url: http://johan.kiviniemi.name/blag/2005/12/31/gb.fi/
+filter:
+  - erb
+  - markdown
+---
+
+([In English](<%= h url_for_page(:name => 'gb') %>))
+
+[Bitti][bit] on informaation perusyksikkö tietotekniikassa. Yksittäinen bitti voi merkitä arvoa, joka on joko tosi tai epätosi – yksi tai nolla.
+
+[bit]: http://fi.wikipedia.org/wiki/Bitti
+
+Tietokonemuistin, kuten [keskusmuistin][ram] ja [kiintolevytilan][harddisk], määrä mitataan yleensä bitteinä tai bitistä johdettuina yksikköinä, kuten [tavuina][byte] (tavu on yhtä kuin 8 bittiä).
+
+[ram]:      http://fi.wikipedia.org/wiki/Keskusmuisti
+[harddisk]: http://fi.wikipedia.org/wiki/Kiintolevy
+[byte]:     http://fi.wikipedia.org/wiki/Tavu_%28tietotekniikka%29
+
+Pitkään tämä riitti, mutta viime aikoina tulleiden uusien teknologioiden myötä tilanne on muuttunut.
+
+Kuten nörteimmät meistä jo tietävätkin, uusin tietokonelaitteiston valmistajien innovaatio on bitti, jonka paino voi vaihdella. Tämän teknologian nimi on *VWBS*, Variable-Weight Bit Storage. Aiemmin kaikki bitit yksittäisessä kiintolevyssä painoivat saman verran. Sitä mukaa, kun valmistajat kykenivät tekemään kevyempiä bittejä, kiintolevyjen fyysinen koko pieneni ja yksittäiselle kiintolevylle mahtuvan tiedon määrä kasvoi.
+
+VWBS:n myötä kiintolevylle mahtuva bittien määrä ei ole enää vakio. Sen sijaan kunkin bitin paino vaikuttaa kiintolevylle mahtuvien bittien kokonaismäärään. Tämän vuoksi otettiin käyttöön uusi yksikkö muistikapasiteetin mittaamiseen: **grammabitti, `gb`**.
+
+Yksikköä `gb` ei pidä sekoittaa yksikköön `GB` (gigatavu), jolla usein ilmaistaan sellaisten kiintolevyjen kapasiteettia, jotka eivät tue VWBS-teknologiaa.
+
+### Yksinkertaistettu esimerkki
+
+Kuvitellaan, että meillä on `100 gb`:n kiintolevy. Jos käytämme `0.10 ng` (nanogramman) bittejä, voimme tallentaa `100 gb/(0.10 ng) = 1 000 Gb` (gigabitin) verran informaatiota sille. Mutta jos käytämme kevyempiä `0.08 ng`:n bittejä, voimme tallentaa `100 gb/(0.08 ng) = 1 250 Gb`.
+
+`1 000 Gb = 125 GB` ja `1 250 Gb ≈ 156 GB`.
+
+Jos olemme tallentaneet `500 Gb`:n verran `0.08 ng`:n painoisia bittejä `100 gb`:n kokoiselle kiintolevylle, jäljellä oleva kapasiteetti on `100 gb − (500 Gb · 0.08 ng) = 100 gb − 40 gb = 60 gb`.
+

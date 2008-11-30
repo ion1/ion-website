@@ -1,0 +1,15 @@
+---
+title: Emacs key bindings in Gtk apps
+created_at: 2006-12-26 17:04:14 +02:00
+old_url: http://johan.kiviniemi.name/blag/2006/12/26/emacs-key-bindings-in-gtk-apps/
+filter:
+  - markdown
+---
+
+    echo 'gtk-key-theme-name = "Emacs"' >>~/.gtkrc-2.0
+    gconftool -t string --set /desktop/gnome/interface/gtk_key_theme Emacs
+
+Now ^W does what it’s supposed to do, instead of e.g. accidentally closing the tab in Firefox. Yay.
+
+What I really want are Vim key bindings in all text boxes, though.
+

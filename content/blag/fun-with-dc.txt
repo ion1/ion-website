@@ -1,0 +1,28 @@
+---
+title: Fun with dc
+created_at: 2006-12-28 20:43:31 +02:00
+old_url: http://johan.kiviniemi.name/blag/2006/12/28/fun-with-dc/
+filter:
+  - markdown
+---
+
+Something I wrote a couple of years ago:
+
+ASCII [Mandelbrot][]:
+
+[mandelbrot]: http://en.wikipedia.org/wiki/Mandelbrot_set
+
+    [lolssdsl0lqx]sx[1+lddd*lld*-ls+dsdrll2**lo+dsld*rd*+4<kd15>q]sq[q
+    ]9ksk[d77/3*2-ss47lxx-P1+d78>0]s00[d23/.5-3*so0l0xr10P1+d24>u]dsux
+
+[Quine][]:
+
+[quine]: http://en.wikipedia.org/wiki/Quine_%28computing%29
+
+    [91PP[dx]93PP]dx
+
+([dc][] is an [RPN][] calculator. It’s one of the oldest Unix utilities.)
+
+[dc]:  http://en.wikipedia.org/wiki/Dc_%28Unix%29
+[rpn]: http://en.wikipedia.org/wiki/Reverse_Polish_notation "Reverse Polish notatiton"
+

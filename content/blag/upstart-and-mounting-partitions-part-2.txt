@@ -1,0 +1,105 @@
+---
+title: Upstart and mounting partitions, part 2
+created_at: 2007-03-19 13:07:46 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/03/19/upstart-and-mounting-partitions-part-2/
+filter:
+  - markdown
+---
+
+There has been a nice discussion about my [previous post][previous] on the [Upstart mailing list][mailinglist]. Here’s an updated version with the ideas from the list applied.
+
+[previous]: http://johan.kiviniemi.name/blag/2007/03/15/upstart-and-mounting-partitions/
+[mailinglist]: https://lists.ubuntu.com/mailman/listinfo/upstart-devel
+
+The examples still do not check whether the filesystems should be checked automatically, and lack error checking. That will be trivial to add, but for now, I’ll focus on simplicity.
+
+### /etc/event.d/fsck
+
+    start on block-device-added
+
+    instance
+
+    script
+        locks="$(sysblock --short --physdev "$DEVNAME")"
+        # DEVNAME=/dev/mapper/vg-root → locks="sda sdb" (RAID-1)
+        # DEVNAME=/dev/sda1           → locks="sda"
+
+        locking $locks -- fsck -y "$DEVNAME"
+
+        initctl variable append checked-filesystems "$DEVNAME"
+
+        initctl emit filesystem-checked "$DEVNAME" -eDEVNAME
+    end script
+
+### /etc/event.d/mount
+
+    start on filesystem-checked
+    start on filesystem-mounted
+
+    instance
+
+    script
+        initctl variable list checked-filesystems | while read devname; do
+            mountpoint="$(getmntent -fD "$devname")"
+
+            if getmntent --prereqs-satisfied -d "$mountpoint"; then
+                mount "$mountpoint"
+
+                initctl variable remove checked-filesystems "$devname"
+
+                initctl emit filesystem-mounted "$mountpoint" \\
+                    -eDEVNAME="$devname" -eMOUNTPOINT="$mountpoint"
+            fi
+        done
+    end script
+
+### The commands
+
+*   `initctl variable` has the following subcommands:
+
+    *   `clear NAME`: Removes all entries from NAME. The underlying implementation frees NAME from memory if it becomes empty, and any operations transparently allocate a new list on demand.
+    *   `set NAME VALUE [...]`: Sets NAME to `[VALUE]`, or `[VALUE0, VALUE1, ...]` in case of multiple VALUE parameters, overwriting any existing values. Any duplicate entries are ignored.
+    *   `append NAME VALUE [...]`: Appends each VALUE to the list NAME. If any of them already exist in NAME, they are ignored.
+    *   `remove NAME VALUE [...]`: Removes each VALUE from the list NAME. If any of them do not exist in NAME, they are ignored.
+    *   `list NAME`: Prints each entry to stdout on separate lines.
+
+*   The `getmntent` command will grow the following functionality:
+
+    *   `--prereqs`: Implies `-f` (parse `/etc/fstab`). Prints each fstab entry that is a prerequisite of the mountpoint in question, e.g. `/` and `/var` need to be mounted before `/var/tmp` is mounted, if all of them exist in fstab.
+    *   `--prereqs-satisfied`: Computes the list of prerequisite mounts from `/etc/fstab` and exits with the return value of `0` if all of them exist in `/etc/mtab` (that is, all of them are already mounted), or `1` if some of them are still not mounted.
+
+*   `locking [LOCKNAME ...] -- CMDLINE`
+
+    `locking(1)` opens and exclusively locks `sprintf ("/var/run/locking/%s.%s", sanitize (lockname), sha1sum (lockname))` for each `LOCKNAME` and runs the command.
+
+*   `sysblock [--short] [--dev] [--parent|--slaves|--holders|--physdev] [DEVICE ...]`
+
+    `sysblock(1)` maps `/dev` nodes to `/sys/block` nodes and vice versa. All `/dev` paths listed on the command line are converted to their `/sys/block` equivalents before processing. When called with the `--dev` parameter, the resulting output list of `/sys/block` paths is converted to the `/dev` equivalents.
+
+    With the `--parent` parameter, it converts `/sys/block/foo/bar` to `/sys/block/foo`, and `/sys/block/baz` to nothing.
+
+    With the `--slaves` or the `--holders` parameter, it lists the devices linked from `/sys/block/device/slaves` or `/sys/block/device/holders` respectively.
+
+    With the `--physdev` parameter, it follows each device’s parents or slaves, until it reaches the end of the tree. The final devices it ended up at are listed.
+
+    Usage examples:
+
+        sysblock /dev/sda1                             → /sys/block/sda/sda1
+        sysblock --dev /sys/block/sda/sda1             → /dev/sda1
+        sysblock --dev sda/sda1                        → /dev/sda1
+
+    (`/sys/block` prefix is assumed)
+
+        sysblock --short /dev/sda1                     → sda/sda1
+        sysblock --short --dev /sys/block/sda/sda1     → sda1
+        sysblock --short --dev sda/sda1                → sda1
+
+        sysblock --short /dev/mapper/vg-root           → dm-0
+        sysblock --short --slaves /dev/mapper/vg-root  → md0
+        sysblock --short --slaves md0                  → sda/sda1 sdb/sdb1
+        sysblock --short --parent sda/sda1 sdb/sdb1    → sda sdb
+
+        sysblock --short --physdev /dev/mapper/vg-root → sda sdb
+
+        sysblock --dev --physdev /dev/mapper/vg-root   → /dev/sda /dev/sdb
+

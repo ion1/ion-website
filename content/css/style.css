@@ -1,0 +1,61 @@
+---
+extension: css
+filter:    sass
+layout:    nil  # no layout
+sass_options:
+  :style: :expanded
+---
+
+#hd h1 a
+  :color           inherit
+  :text-decoration inherit
+
+h1, h2, h3, h4, h5, h6
+  :color         #345
+  :border-bottom 0.1em solid #cde
+
+#sidebar
+  ul, li
+    :margin  0
+    :padding 0
+  li
+    :display       block
+    :margin-bottom 0.4em
+  a:link,
+  a:visited
+    :text-decoration none
+  a:hover,
+  a:focus,
+  a:active
+    :text-decoration underline
+
+.box
+  :color            #222
+  :background-color #eef
+  :padding          0.5em
+  :margin-bottom    1em
+  :border           1px solid #aad
+
+  :border-radius         1em
+  /* Evil invalid CSS
+  :-moz-border-radius    1em
+  :-webkit-border-radius 1em
+
+.nobr
+  :white-space nowrap
+
+.small
+  :font-size 85%
+  :color     #777
+
+.hidden
+  :display none
+
+/* Google’s Enhanced 404 tool
+
+#goog-wm
+  h3.closest-match a
+  h3.other-things
+  ul li
+  li.search-goog
+    :display block

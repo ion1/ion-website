@@ -1,0 +1,14 @@
+---
+title: The order of Heroes episodes and graphic novels
+created_at: 2007-10-15 16:13:35 +03:00
+old_url: http://johan.kiviniemi.name/blag/2007/10/15/the-order-of-heroes-episodes-and-graphic-novels/
+filter:
+  - markdown
+---
+
+The episodes often assume you’ve read the corresponding comics. Occasionally the comics even originally introduce characters used in following episodes.
+
+This page is meant to help watch and read them in the correct order: [The order of Heroes episodes and graphic novels][heroes]
+
+[heroes]: http://heh.fi/heroes/
+

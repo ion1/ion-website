@@ -1,0 +1,268 @@
+---
+title: Ruby vs. Python
+created_at: 2006-05-28 23:50:56 +03:00
+old_url: http://johan.kiviniemi.name/blag/2006/05/28/ruby-vs-python/
+filter:
+  - erb
+  - markdown
+---
+
+([Suomeksi / in Finnish](<%= h url_for_page(:name => 'ruby-vs-python.fi') %>))
+
+I used to regard Python as the most enjoyable interpreted language I knew. Then I got to know Ruby – and I have yet to find a nicer one. I have written some arguments for my opinion to this page.
+
+Before discussing the subject, I should mention that Ruby <em>is</em> currently slower than Python. OTOH, Python is slower than C. Perhaps Ruby fits best for your project, perhaps not.
+
+Personally I have yet to bump into a situation where Ruby isn’t fast enough. YMMV. Also note that you can easily rewrite the bottlenecks in C after profiling your code.
+
+### Private methods and variables
+
+To make methods and instance variables private in Python, one **always** needs to write `__` in front of the name. In Ruby, instance variables are private by default. Methods defined after the method call `private` are private.
+
+### Functions and methods
+
+There are no functions and methods separately in Ruby; all of them are methods. In Python, e.g. `len()` is a function, but `items()` is a method. Such inconsistencies remind me of [PHP][], *\*shiver\**.
+
+[php]: http://tnx.nl/php.jpg "PHP – Training wheels without the bike"
+
+Python:
+
+    string = 'Hello world'
+    print string.count('o'), len(string)  # prints 2, 11 – why not string.len()?
+
+Ruby:
+
+    string = 'Hello world'
+    puts string.count('o'), string.length  # prints 2, 11
+
+### “`self`”
+
+In Python, one needs to write `self` as the first parameter of a method definition (alike Perl). Furthermore, Python doesn’t even require the variable name to be `self`, it can be `poop_rules` for all Python cares. In Ruby, `self` is automatically available in a similar fashion as `this` in C++.
+
+Additionally, the method call `self.method` can be shortened to `method`, as `self` is the default receiver.
+
+### Notation of instance variables
+
+In Python, one has to write private instance variables using the frustratingly long form `self.__foobar`. In Ruby, the form is `@foobar`.
+
+To get away with less typing, many Python programmers I’ve discussed with resort to making variables (and methods) public even when there’s no reason for them to be public. Then they say it’s a good thing and the “Python way”. Oh well, they are entitled to their opinion.
+
+### In Ruby, everything is an object
+
+Even numbers. That lets you do stuff like:
+
+    4.megabytes > 2345.kilobytes          # ⇒ true
+
+Or:
+
+    3.weeks.ago                           # ⇒ Sun Nov 19 09:39:05 EET 2006
+
+In the example above, `Numeric#weeks` is defined as `self * 7.days`. You can probably guess how `Numeric#days`, `#hours` etc. are defined. :-)
+
+`Numeric#ago` is `Time.now - self`, i.e. it returns a `Time` object.
+
+### Blocks
+
+Ruby has a *very* neat syntax for passing a code block as a parameter to a method call (see also [closures][closure]; function reference [does not equal a closure][python-closures]).
+
+[closure]: http://martinfowler.com/bliki/Closure.html
+[python-closures]: http://mail.python.org/pipermail/python-list/2004-July/270951.html
+
+A hypothetical example:
+
+    time_tomorrow = TimeTravel.travel(1.day.from_now) { Time.now }
+
+Here we have the method `TimeTravel.travel` which accepts a **time value** and **a block of code** as parameters. The method can do anything it wants with the block of code: run something and then execute the block; execute the block multiple times; store the block for later execution etc.
+
+In this case, the method travels to the given time using a time machine, then invokes the block and finally returns the block’s return value.
+
+In this example, the block returns `Time.now`, which is passed to the `time_tomorrow` variable.
+
+The ability to pass a block to a method gives you a powerful way for doing many things. Having a nice syntax for doing it makes it fun.
+
+#### The first real-world example: `each`
+
+Many classes, such as the built-in [Array][], [Hash][], [IO][] and [Dir][], implement the `each` method. It simply iterates over whatever the object “contains”, invoking the given block once for each item.
+
+[array]: http://ruby-doc.org/core/classes/Array.html
+[hash]:  http://ruby-doc.org/core/classes/Hash.html
+[io]:    http://ruby-doc.org/core/classes/IO.html
+[dir]:   http://ruby-doc.org/core/classes/Dir.html
+
+`Array#each` iterates over the array’s elements. `Hash#each` iterates over the key/value pairs. `IO#each` iterates over lines received by an `IO` object (from an open file, a HTTP connection etc). `Dir#each` iterates over a directory listing while it’s being received.
+
+    # Iterate over the elements of an array.
+    [42, 'blah', Time.now].each do |element|
+      puts element
+    end
+    
+    # Iterate over the file line by line.
+    open('filename').each do |line|
+      puts line
+    end
+
+You may wonder what’s the value of `each`, when you could just have a `for` structure, like in many other programming languages.
+
+Ruby has a built-in [mixin][] called [Enumerable][]. You can `include` it in any class, and if your class defines the `each` method, you get a bunch of really useful methods “for free”:
+
+[mixin]:      http://en.wikipedia.org/wiki/Mixin
+[enumerable]: http://ruby-doc.org/core/classes/Enumerable.html
+
+*   `array.all? {|item| item < 42 }` returns `true` if all items in an array are less than 42.
+*   `dir.any? {|filename| filename =~ /foo/ }` returns `true` if any filename in the directory contains the text “foo”.
+*   `object.each_with_index {|item, i| puts "Item number #{i}: #{item}" }` – each\\_with\\_index is like each, but it passes an additional integer to the block, starting from zero.
+*   `books.sort_by {|book| book.author }` returns a list of books sorted by the author’s name.
+*   etc. etc.
+
+#### Other examples
+
+##### Files
+
+You can pass a block to an `open` call:
+
+    open 'filename', 'w' do |io|
+      io.puts "Hello world!"
+    end
+
+When `open` is called with a block, it
+
+*   opens the file
+*   invokes the block with the IO object as a parameter
+*   closes the file – **no need to take care of that manually**
+*   returns the block’s return value
+
+Let’s say we want a variant of the `open` method that
+*   instead of the given filename, **opens a temporary file for writing**
+*   invokes the block with the IO object as a parameter
+*   closes the file
+*   if the block returned successfully,
+    *   **moves the temporary file over the requested filename** and returns the block’s return value,
+    *   otherwise deletes the temporary file and passes the exception to the caller
+
+Can you guess how much different the method call would be, when we can utilize blocks?
+
+    Tempfile.open_auto_rename 'filename' do |io|
+      io.puts "Hello world!"
+    end
+
+That’s it.
+
+##### Threads
+
+If you're familiar with [threading][thread], you’ll realize blocks are a natural way to spawn threads:
+
+[thread]: http://ruby-doc.org/core/classes/Thread.html
+
+    my_thread = Thread.new do
+      puts  "This code is running in a thread."
+      sleep 10
+      puts  "Slept for a while."
+    end
+    
+    # Now we can control the thread using the my_thread object.
+
+##### Unit testing
+
+With the [RSpec][] unit testing framework, you define the tests using the following syntax. Note that each `do`...`end` segment is a block.
+
+[rspec]: http://rspec.rubyforge.org/
+
+    context "Book" do
+      setup do
+        @book = Book.new :author => "Douglas Adams",
+                         :title  => "The Hitchhiker's Guide to the Galaxy",
+                         :year   => 1979
+      end
+    
+      specify "should have the correct author" do
+        @book.author.should == "Douglas Adams"
+      end
+    
+      specify "should have the correct title" do
+        @book.title.should == "The Hitchhiker's Guide to the Galaxy"
+      end
+    
+      specify "should have the correct year" do
+        @book.year.should == 1979
+      end
+    
+      specify "should not have an ISBN" do
+        @book.isbn.should == nil
+      end
+    
+      specify "should be able to add the ISBN" do
+        isbn = '0-330-25864-8' 
+    
+        @book.isbn        =  isbn
+        @book.isbn.should == isbn
+      end
+    
+      specify "should not be able to burn the book" do
+        lambda { @book.burn! }.should_raise Book::DoesNotCatchFireError
+      end
+    end
+
+The output looks like:
+
+<blockquote class="rspec">
+<ul>
+<li>Book
+  <ul>
+  <li class="success">should have the correct author</li>
+  <li class="success">should have the correct title</li>
+  <li class="success">should have the correct year</li>
+  <li class="success">should not have an ISBN</li>
+  <li class="success">should be able to add the ISBN</li>
+  <li class="success">should not be able to burn the book</li>
+  </ul>
+</li>
+</ul>
+<p>Finished in 0.025893 seconds</p>
+<p class="success">6 specifications, 0 failures</p>
+</blockquote>
+
+##### Mechanize
+
+[WWW::Mechanize][mechanize] is a **really** nice class for [screen scraping][] the web.
+
+[mechanize]:       http://rubyforge.org/projects/mechanize
+[screen scraping]: http://en.wikipedia.org/wiki/Screen_scraping
+
+Some time ago I found myself wishing for a way to tell Mechanize to go back to a certain page in the page history after clicking various links and running code that might raise an exception.
+
+I wrote a method called `transact`, which – surprise – utilizes blocks.
+
+An example of the its usage:
+
+    get "http://example.net/video_index.html"
+    
+    # Find all links starting with "Video:"
+    page.links.text(/^Video:/).each do |link|
+      begin
+        transact do
+          click link  # Example: http://example.net/videos/ruby_on_rails.html
+    
+          # From the resulting page, find the actual download link.
+          video_link = page.links.text('Download this video').first
+          filename   = File.basename video_link.href
+    
+          download video_link, filename
+        end
+    
+      rescue => e
+        log.error "Failed to download from #{link.href}: #{e.class}: #{e}"
+      end
+    end
+
+After the block, we have automatically returned to the video index page, no matter whether the code passed to `transact` succeeded or raised an exception.
+
+That means we’re ready to click the next video page link from the index.
+
+### Conclusion
+
+There are many things in Ruby that makes coding fun. I sincerely recommend learning it.
+
+By the way, here’s the [TimeTravel implementation][timetravel]. ;-)
+
+[timetravel]: http://johan.kiviniemi.name/stuff/ruby/acme/timetravel.html
+

@@ -1,0 +1,15 @@
+---
+title: Music
+created_at: 2008-11-30 23:14:42.806620 +02:00
+filter:
+  - markdown
+---
+
+### Previews
+
+These are work in progress.
+
+* [Tuhannen tulimmaista – Tavarapaljouden onnea (preview 1)](tuhannen_tulimmaista/tuhannen_tulimmaista-tavarapaljouden_onnea-prev1.ogg) (Vorbis, 5.6M)
+* [Ion – Delusions of Grand Piano](ion-delusions_of_grand_piano.ogg) (Vorbis, 3.0M) ([video](http://www.youtube.com/watch?v=qZBXA4ye_us&amp;fmt=18))
+* [Ion – Schizophrenia (preview 1)](ion-schizophrenia-prev1.ogg) (Vorbis, 3.6M)
+* [Ion – Happo (preview 0)](ion-happo-prev0.ogg) (Vorbis, 7.8M)

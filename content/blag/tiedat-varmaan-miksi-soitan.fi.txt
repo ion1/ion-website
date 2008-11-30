@@ -1,0 +1,39 @@
+---
+title: ”Tiedät varmaan, miksi soitan”
+created_at: 2007-01-02 00:13:07 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/01/02/tiedat-varmaan-miksi-soitan/
+filter:
+  - markdown
+---
+
+Tapahtui muutama vuosi sitten:
+
+Puhelimeni soi. Vastaan. Mieshenkilö esittelee itsensä: ”Tässä Etunimi Sukunimi siitä ja siitä puhelinyhtiöstä. Tiedät varmaan, miksi soitan.”
+
+Olin ollut kuukausia aiemmin kyseisessä firmassa kesätöissä. Yritän miettiä, että mitä soittaja mahtaa ajaa takaa, ja miksei hän vain kerro asiaansa.
+
+Lyhyen tauon jälkeen vastaan, etten kyllä keksi.
+
+Soittaja ilmoittaa, että olen murtautunut heidän palvelimeensa ja asentanut [rootkitin][rootkit]. Ahaa. En tiennytkään tehneeni moista. Hänellä on kuulemma varmat todisteet teostani. Pyydän päästä juttelemaan kasvokkain jonkun kanssa paikan päällä, ja sovimme niin.
+
+[rootkit]: http://en.wikipedia.org/wiki/Rootkit
+
+Tapaan sovittuna ajankohtana puhelinyhtiöllä henkilön, jonka alaisuudessa olin toiminut kesätyöjaksona. Kerron hänelle, etten ole tehnyt väitettyä tietomurtoa, eikä minulla ole mitään motivaatiota tehdä sellaista. Hän näyttää uskovan minua. Saan kuulla heidän havainneen, että koneelle oli murtauduttu – muistaakseni sitä oli käytetty roskapostin lähettämiseen. Hyvänen aika, minähän vihaan spämmiä sydämeni pohjasta.
+
+Saan myös kuulla, että heillä on sopimus erään toisen firman kanssa: kyseinen firma ylläpitää heidän palvelimiaan hoitaen tietoturvapäivitykset ymv. He olivat vieneet saastuneen koneen ko. firmalle tutkittavaksi ja sieltä oli ilmoitettu, että tunnus `johkiv` oli tietomurron takana.
+
+Haa! Muistan, että jossain vaiheessa kesätyöjaksoa minulle oli tehty tunnus heidän nimipalvelimelleen työtehtävää varten. En ollut muistanut koko tunnuksen olemassaoloa. (Ihmettelen myös, miksi tunnusta ei oltu poistettu palvelimelta työn tehtyäni.)
+
+Miettiessäni, miksi koneen tutkineesta firmasta väitettäisiin, että *minä* olisin murtautumisen takana, seuraavat mahdollisuudet tulevat mieleen:
+
+*   Tunkeutuja [bruteforcetti][bruteforce] salasanani. Pidän tätä hyvin epätodennäköisenä, koska pyrin käyttämään hankalasti arvattavia salasanoja. Mikäli koneelle kuitenkin päästiin alunperin juuri minun käyttäjätunnuksellani, tunkeutujan piti vielä saada jotenkin pääkäyttäjän oikeudet rootkitin asentaakseen. Siinä tapauksessa koneella piti olla vanha, tietoturvareikäinen versio jostakin ohjelmasta, josta päästäänkin seuraavaan kohtaan:
+*   Koneella oli vanha, tietoturvareikäinen versio jostakin palvelinohjelmasta (esim. ssh, bind), jota tunkeutuja hyödynsi. Tässä tapauksessa **firma, jonka he olivat palkanneet hoitamaan palvelimen tietoturvan, ei ollut hoitanut tehtäväänsä**.
+    *   Tätä kautta tunkeutuja sai suoraan pääkäyttäjän oikeudet. Miten sitten minun tunnukseeni päädyttiin?
+        *   On lievä mahdollisuus, että tunkeutuja purki palvelimelle tar-paketin, joka sisälsi sillä käyttäjätunnuksen ID-numerolla olevia tiedostoja, joka sattui vastaamaan tunnusta `johkiv` kyseisellä koneella.
+        *   On jonkinasteinen mahdollisuus, että koneen tutkineessa firmassa valittiin tunnukseni sijaiskärsijäksi sen sijaan, että he olisivat myöntäneet hoitaneensa ylläpitotehtävänsä heikosti.
+        *   Ehkäpä firmasta kerrottiin, että ”joku” koneen käyttäjätunnuksista oli tietomurron takana sen sijaan, että he olisivat myöntäneet laiminlyöntinsä, ja jollakin puhelinyhtiön väestä välähti, että ”se oli varmaan tuo kesätyöläinen”.
+
+[bruteforce]: http://en.wikipedia.org/wiki/Brute_force_attack
+
+Joka tapauksessa minua ei enää syytetty tuon jälkeen. Loppu hyvin, kaikki hyvin.
+

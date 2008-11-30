@@ -1,0 +1,118 @@
+---
+title: Upstart and interaction with user
+created_at: 2007-03-20 23:19:01 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/03/21/upstart-and-interaction-with-user/
+filter:
+  - markdown
+---
+
+This page describes an idea about a library and a set of programs that make it possible for normally non-interactive programs such as daemons and system startup jobs to interact with the user when necessary. For example, the `fsck` job might show a progress bar and ask questions about repairing a filesystem.
+
+It is important that multiple programs may present questions simultaneously and the user may answer to them in any order.
+
+It is essential that the interaction works
+
+*   when only a Linux virtual console is in use,
+*   when a boot splash screen is visible and
+*   when there’s an active X session.
+
+### General design
+
+I’ll use the term *application* when talking about system programs that need to interact with the user, and *frontend* when talking about programs that present an interface to the user.
+
+Applications as well as frontends use `libwhat` – for lack of a better name – which communicates with `whatd` over a UNIX socket. `whatd` handles the message passing between applications and frontends.
+
+When an application creates a new `What` instance, it must define a title, under which all its entries are shown. E.g. `fsck` with `libwhat` support might use
+
+    what = what_new (sprintf ("Checking filesystem %s", devname));
+
+By default, `what_new` blocks until it has successfully connected to `whatd`.
+
+The `libwhat` API allows applications to open questions in
+
+*   blocking mode:
+
+        answer = what_choice (what, "Will you marry me?",
+                              WHAT_YES, WHAT_NO, "Never!");
+
+*   non-blocking mode:
+
+        question_handle = what_input_nonblock (what, my_callback, my_data,
+                                               "What's bothering you?", "");
+
+For non-blocking mode, adapters for e.g. glib and Qt main loops will be implemented.
+
+`libwhat` can be used easily from shell scripts using the command line tool:
+
+    /sbin/what choice "jackbauerd" "The mainframe matrix has been backtraced
+        in order to enhance the subnet node. How should I proceed?" \\
+        "Access the protocol stream" "Engage the socket firewall"
+
+It waits for the answer and prints it to the standard output.
+
+### Frontends
+
+When a frontend connects to `whatd`, it immediately receives the full list of any currently shown UI elements. After that, it receives messages when applications create new elements, close or change existing ones, or when a question has been answered in another simultaneously running frontend.
+
+If `whatd` receives an answer to the same question from multiple frontends, the first one is processed and the rest are ignored. When the user answers a question in a frontend, or when a frontend learns a question has been answered in another frontend, the question in question is removed from the UI. Any questions?
+
+The user can move between questions freely, and answer to them in any order.
+
+#### `what-terminal`
+
+A plain terminal-based UI. Normally it’s opened in its own virtual console as soon as possible during the system startup. It starts working immediately after `whatd` is running.
+
+A mockup:
+
+    ┌────────────────────────────────────────────────────────────────────────────┐
+    │ Distro branding, blahblah                                                  │
+    ├────────────────────────────────────────────────────────────────────────────┤
+    │ Checking filesystem /dev/sda1                                              │
+    │ [#############################                                     ] 43.9% │
+    │ Do you want set inode 12765 on fire?  [ OK ] [ Cancel ]                    │
+    ├────────────────────────────────────────────────────────────────────────────┤
+    │ Checking filesystem /dev/sdb1                                              │
+    │ [###########                                                       ] 16.7% │
+    ├────────────────────────────────────────────────────────────────────────────┤
+    │ Test entry with a pulsating (moving back and forth) progress bar           │
+    │ [                                            ########                    ] │
+    │ What's your social security number? ______________________________________ │
+    │                                                                            │
+    │                                                                            │
+    │                                                                            │
+    │                                                                            │
+    │                                                                            │
+    │                                                                            │
+    │                                                                            │
+    │                                                                            │
+    │                                                                            │
+    └────────────────────────────────────────────────────────────────────────────┘
+
+#### `what-gtk` and `what-qt`
+
+When a privileged user (e.g. member of the ‘admin’ group, depends on the configuration) starts an X session, the appropriate X frontend is started. It’s invisible, until a progress bar or a question exists. When that is the case, it creates a system tray icon and shows a notification bubble. When the icon is clicked, it opens something like the following mockup:
+
+![A mockup of the what-gtk UI](http://johan.kiviniemi.name/tmp/what-gtk)
+
+#### `usplash` and other boot splash programs
+
+Boot splash programs should implement `libwhat` support as well, so that progress bars and questions are shown in the splash screen.
+
+A mockup:
+
+![A mockup of the what-usplash UI](http://johan.kiviniemi.name/tmp/what-usplash)
+
+### Considerations
+
+*   There must be a way for an administrator to prevent any questions from being asked, for example on a public or headless machine. A good solution is defining a default answer for each question, which will be used when the question will not or can not be shown. 
+
+    A default answer for each question would also provide a nice UI enhancement: say the movement between questions happens with arrow up/down and the movement between different answers to a multiple choice question happens with arrow left/right. The default answer would always be the one initially selected when moving to a question.
+
+*   Should there be a mechanism for letting applications affect the order in which their respective UI elements are shown? For example, it might be desired that the progress bar presented by a program that keeps track of the progress of the system startup is always the topmost element.
+
+*   Should unprivileged users be able to see progress bars, even though they aren’t able to answer questions? Should it be possible for applications to present questions that **any** user may answer? (The answer to both is probably yes.)
+
+*   How should localization be implemented?
+
+*   D-Bus instead of whatd? That would be a possible solution, but it would require D-Bus to be one of the first things started during system startup. The D-Bus daemon and libraries would need to reside in the root partition.
+

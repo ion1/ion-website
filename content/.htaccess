@@ -1,0 +1,30 @@
+---
+extention: nil
+filter:    erb
+layout:    nil  # no layout
+dirty:     true
+---
+ErrorDocument	404	<%= h url_for_page(:filename => 'error404') %>
+
+RewriteEngine   On
+
+RewriteCond	%{HTTP_USER_AGENT}	!FeedBurner
+RewriteRule	^feed$			http://feeds.heh.fi/JohanKiviniemi	[R=permanent,L]
+
+RewriteRule	^software/hardware-connected	https://launchpad.net/hardware-connected	[R=temp,L]
+RewriteRule	^software/apt-mark-sync		https://launchpad.net/apt-mark-sync		[R=temp,L]
+
+<% pages = @pages.find :all
+   pages.each do |p|
+     if p.old_url
+       old_urls = p.old_url
+       old_urls = [old_urls] unless old_urls.is_a? Array
+       old_urls.each do |url|
+         if url.sub! %r{^#{Webby.site.base}/*}, ''
+-%>
+RewriteRule     ^<%= url %>$  <%= Webby.site.base+p.url %>  [R=permanent,L]
+<%       end
+       end
+     end
+   end
+-%>

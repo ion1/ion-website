@@ -1,0 +1,132 @@
+---
+title: Upstart and mounting partitions
+created_at: 2007-03-15 13:06:40 +02:00
+old_url: http://johan.kiviniemi.name/blag/2007/03/15/upstart-and-mounting-partitions/
+filter:
+  - markdown
+---
+
+(Also see the [updated version of this post][updated].)
+
+[updated]: http://johan.kiviniemi.name/blag/2007/03/19/upstart-and-mounting-partitions-part-2/
+
+This piece of text is a braindump about how one might begin to implement the mounting of partitions with [Upstart][].
+
+[upstart]: http://upstart.ubuntu.com/
+
+In the jobs below, there are some things that aren’t implemented very nicely, especially the computation of prerequisite mounts for mountpoints (e.g. `/var` needs to be mounted before `/var/run` is mounted). I think there is a consensus that such functionality that allows a cleaner implementation of the job needs to be implemented to Upstart itself.
+
+Exactly what does that mean? Well, feel free to share *your* ideas at the [Upstart mailing list][mailinglist]. One way to do it might be a *metajob* that parses `fstab` and programmatically builds a job for each mountpoint that waits for the appropriate prerequisites.
+
+[mailinglist]: https://lists.ubuntu.com/mailman/listinfo/upstart-devel
+
+
+Whether partitions should actually be automounted or not isn’t checked yet. The [getmntent][] command probably should be modified so that it’s possible to reverse the query – e.g. search for entries that do *not* have ‘`noauto`’ in the options.
+
+[getmntent]: http://codebrowse.launchpad.net/~keybuk/upstart/replacement-initscripts/files/scott%40netsplit.com-20070213145300-ulgf4s7og5yocm6e?file_id=src-20070213144831-o2stwz7zt81kbh8a-1
+
+The yet-to-be-written commands `locking`, `lread`, `lwrite`, `lfilter` and `sysblock` are explained in the end.
+
+### /etc/event.d/fsck
+
+    start on block-device-added
+
+    instance
+
+    script
+        locks="$(sysblock --short --physdev "$BLOCKDEV")"
+        # BLOCKDEV=/dev/mapper/vg-root → locks="sda sdb" (RAID-1)
+        # BLOCKDEV=/dev/sda1           → locks="sda"
+
+        locking $locks -- fsck -y "$BLOCKDEV"
+
+        echo "$BLOCKDEV" | lwrite --append /var/run/checked-filesystems
+
+        initctl emit filesystem-checked -eBLOCKDEV
+    end script
+
+### /etc/event.d/mount
+
+    start on filesystem-checked
+    start on filesystem-mounted
+
+    instance
+
+    script
+        prereqs_satisfied() {
+            local mountpoint="$1"
+            getmntent -fD | while read dir; do
+                case "$mountpoint" in
+                "$dir"/*)
+                    # It is a prerequisite. Is it mounted?
+                    getmntent -mqd "$dir" || return 1
+                esac
+            done
+            return 0
+        }
+
+        blockdevs=$(lread /var/run/checked-filesystems)
+
+        for blockdev in $blockdevs; do
+            mountpoint="$(getmntent -fD "$blockdev")"
+
+            if prereqs_satisfied "$mountpoint"; then
+                mount "$mountpoint"
+
+                lfilter /var/run/checked-filesystems grep -Fxv "$blockdev"
+
+                initctl emit filesystem-mounted -eBLOCKDEV="$blockdev" \\
+                    -eMOUNTPOINT="$mountpoint"
+            fi
+        done
+    end script
+
+### The commands used in the examples
+
+*   `locking [LOCKNAME ...] -- CMDLINE`
+
+    `locking(1)` opens and exclusively locks `sprintf ("/var/run/locking/%s.%s", sanitize (lockname), sha1sum (lockname))` for each `LOCKNAME` and runs the command.
+
+*   `lread [FILENAME ...]`
+
+    For each `FILENAME`, `lread(1)` opens it, places a shared lock on it and cats it to stdout.
+
+*   `lwrite [--append] FILENAME`
+
+    `lwrite(1)` opens the file, places an exclusive lock on it and cats stdin to it.
+
+*   `lfilter FILENAME CMDLINE`
+
+    `lfilter(1)` places an exclusive lock on the file, pipes the contents to the command’s stdin and replaces the contents with the command’s output.
+
+*   `sysblock [--short] [--dev] [--parent|--slaves|--holders|--physdev] [DEVICE ...]`
+
+    `sysblock(1)` maps `/dev` nodes to `/sys/block` nodes and vice versa. All `/dev` paths listed on the command line are converted to their `/sys/block` equivalents before processing. When called with the `--dev` parameter, the resulting output list of `/sys/block` paths is converted to the `/dev` equivalents.
+
+    With the `--parent` parameter, it converts `/sys/block/foo/bar` to `/sys/block/foo`, and `/sys/block/baz` to nothing.
+
+    With the `--slaves` or the `--holders` parameter, it lists the devices linked from `/sys/block/device/slaves` or `/sys/block/device/holders` respectively.
+
+    With the `--physdev` parameter, it follows each device’s parents or slaves, until it reaches the end of the tree. The final devices it ended up at are listed.
+
+    Usage examples:
+
+        sysblock /dev/sda1                             → /sys/block/sda/sda1
+        sysblock --dev /sys/block/sda/sda1             → /dev/sda1
+        sysblock --dev sda/sda1                        → /dev/sda1
+
+    (`/sys/block` prefix is assumed)
+
+        sysblock --short /dev/sda1                     → sda/sda1
+        sysblock --short --dev /sys/block/sda/sda1     → sda1
+        sysblock --short --dev sda/sda1                → sda1
+
+        sysblock --short /dev/mapper/vg-root           → dm-0
+        sysblock --short --slaves /dev/mapper/vg-root  → md0
+        sysblock --short --slaves md0                  → sda/sda1 sdb/sdb1
+        sysblock --short --parent sda/sda1 sdb/sdb1    → sda sdb
+
+        sysblock --short --physdev /dev/mapper/vg-root → sda sdb
+
+        sysblock --dev --physdev /dev/mapper/vg-root   → /dev/sda /dev/sdb
+
