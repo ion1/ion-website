@@ -6,9 +6,10 @@ sass_options:
   :style: :expanded
 ---
 
-#hd h1 a
-  :color           inherit
-  :text-decoration inherit
+h1
+  a:link, a:visited, a:hover, a:focus, a:active
+    :color           inherit
+    :text-decoration inherit
 
 h1, h2, h3, h4, h5, h6
   :color         #345
