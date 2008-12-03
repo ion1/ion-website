@@ -3,7 +3,7 @@ filter: haml
 dirty:  true
 ---
 .box
-  %h3#navigation Navigation
+  %h2#navigation Navigation
   %ul
     %li<
       %a{ :href => '/'}<
@@ -14,7 +14,7 @@ dirty:  true
 
   ~ content_for :sidebar
 
-  %h3 Blag entries
+  %h2 Blag entries
   %ul
     - posts = @pages.find :all, :directory => 'blag', :sort_by => :created_at, :reverse => true
     - posts.each do |p|
