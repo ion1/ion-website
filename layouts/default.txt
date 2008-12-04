@@ -39,6 +39,9 @@ haml_options:
                 Johan Kiviniemi’s series of tubes
             %h2<
               = h @page.title
+            - if @page.created_at
+              %p.small<
+                = @page.created_at.strftime('%Y-%m-%d')
             ~ @content
         #sidebar.yui-b
           ~ render :partial => '/sidebar'

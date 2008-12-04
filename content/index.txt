@@ -26,6 +26,9 @@ You have entered Ion’s website. You are likely to be eaten by a grue.
 -%>
 <div class="box">
   <h3><a href="<%= h p.url %>"><%= h p.title %></a></h3>
+  <% if p.created_at -%>
+    <p class="small"><%= p.created_at.strftime('%Y-%m-%d') %></p>
+  <% end -%>
   <%= render(p) %>
 </div>
 <% end -%>
