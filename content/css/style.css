@@ -6,13 +6,19 @@ sass_options:
   :style: :expanded
 ---
 
+!color_neg  = white - #131
+!h_text     = white - !color_neg
+!box_bg     = white - !color_neg / 8
+!box_text   = white - !color_neg * 0.9
+!small_text = white - !color_neg / 2
+
 h1
   a:link, a:visited, a:hover, a:focus, a:active
     :color           inherit
     :text-decoration inherit
 
 h1, h2, h3, h4, h5, h6
-  :color         #345
+  :color = !h_text
 
 #sidebar
   ul, li
@@ -30,10 +36,10 @@ h1, h2, h3, h4, h5, h6
     :text-decoration underline
 
 .box
-  :color            #222
-  :background-color #def
-  :padding          0.5em
-  :margin-bottom    1em
+  :color            = !box_text
+  :background-color = !box_bg
+  :padding            0.5em
+  :margin-bottom      1em
 
   :border-radius         1em
   /* Evil invalid CSS
@@ -44,8 +50,8 @@ h1, h2, h3, h4, h5, h6
   :white-space nowrap
 
 .small
-  :font-size 85%
-  :color     #777
+  :font-size   85%
+  :color     = !small_text
 
 .hidden
   :display none
