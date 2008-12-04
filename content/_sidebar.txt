@@ -6,11 +6,9 @@ dirty:  true
   %h2#navigation Navigation
   %ul
     %li<
-      %a{ :href => '/'}<
-        Home
+      = link_to_page_unless_current :filename => 'index', :in_directory => '/'
     %li<
-      %a{ :href => '/music'}<
-        Music
+      = link_to_page_unless_current :filename => 'music', :in_directory => '/'
 
   ~ content_for :sidebar
 
@@ -19,5 +17,4 @@ dirty:  true
     - posts = @pages.find :all, :directory => 'blag', :sort_by => :created_at, :reverse => true
     - posts.each do |p|
       %li<
-        %a{ :href => p.url }<
-          = p.title
+        = link_to_page_unless_current p
