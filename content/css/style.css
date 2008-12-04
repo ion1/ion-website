@@ -13,7 +13,6 @@ h1
 
 h1, h2, h3, h4, h5, h6
   :color         #345
-  :border-bottom 0.1em solid #cde
 
 #sidebar
   ul, li
@@ -32,10 +31,9 @@ h1, h2, h3, h4, h5, h6
 
 .box
   :color            #222
-  :background-color #eef
+  :background-color #def
   :padding          0.5em
   :margin-bottom    1em
-  :border           1px solid #aad
 
   :border-radius         1em
   /* Evil invalid CSS
