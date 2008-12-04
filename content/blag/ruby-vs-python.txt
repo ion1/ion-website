@@ -136,6 +136,7 @@ When `open` is called with a block, it
 *   returns the block’s return value
 
 Let’s say we want a variant of the `open` method that
+
 *   instead of the given filename, **opens a temporary file for writing**
 *   invokes the block with the IO object as a parameter
 *   closes the file
