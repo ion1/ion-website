@@ -42,5 +42,7 @@ haml_options:
             ~ @content
         #sidebar.yui-b
           ~ render :partial => '/sidebar'
-      #ft
-        / Footer goes here.
+      #ft.small
+        %p<
+          = "© #{Time.now.year} <cite>Johan Kiviniemi</cite>"
+        ~ content_for :footer
