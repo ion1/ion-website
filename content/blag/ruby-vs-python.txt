@@ -7,6 +7,10 @@ filter:
   - markdown
 ---
 
+<% content_for :footer do -%>
+<p><code>from __future__ import ruby</code></p>
+<% end -%>
+
 ([Suomeksi / in Finnish](<%= h url_for_page(:name => 'ruby-vs-python.fi') %>))
 
 I used to regard Python as the most enjoyable interpreted language I knew. Then I got to know Ruby – and I have yet to find a nicer one. I have written some arguments for my opinion to this page.
