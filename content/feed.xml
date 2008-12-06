@@ -20,7 +20,7 @@ dirty:     true
   <entry>
     <title><%= h p.title %></title>
     <link href="<%= h(Webby.site.base+p.url) %>"/>
-    <id><%= h(Webby.site.base+p.url) %></id>
+    <id><%= h(if p.old_url then p.old_url else Webby.site.base+p.url end) %></id>
     <updated><%= p.created_at.xmlschema %></updated>
     <content type="html"><%= h render(p) %></content>
   </entry>
