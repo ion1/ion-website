@@ -20,6 +20,7 @@ RewriteRule	^software/apt-mark-sync		https://launchpad.net/apt-mark-sync		[R=tem
        old_urls = p.old_url
        old_urls = [old_urls] unless old_urls.is_a? Array
        old_urls.each do |url|
+         url = url.dup
          if url.sub! %r{^#{Webby.site.base}/*}, ''
 -%>
 RewriteRule     ^<%= url %>$  <%= Webby.site.base+p.url %>  [R=permanent,L]
