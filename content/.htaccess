@@ -9,7 +9,7 @@ ErrorDocument	404	<%= h url_for_page(:filename => 'error404') %>
 RewriteEngine   On
 
 RewriteCond	%{HTTP_USER_AGENT}	!FeedBurner
-RewriteRule	^feed$			http://feeds.heh.fi/JohanKiviniemi	[R=permanent,L]
+RewriteRule	^feed\.xml$		http://feeds.heh.fi/JohanKiviniemi	[R=permanent,L]
 
 RewriteRule	^software/hardware-connected	https://launchpad.net/hardware-connected	[R=temp,L]
 RewriteRule	^software/apt-mark-sync		https://launchpad.net/apt-mark-sync		[R=temp,L]
