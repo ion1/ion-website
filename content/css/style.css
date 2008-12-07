@@ -14,8 +14,8 @@ sass_options:
 
 h1
   a:link, a:visited, a:hover, a:focus, a:active
-    :color           inherit
-    :text-decoration inherit
+    :color           = !h_text
+    :text-decoration   none
 
 h1, h2, h3, h4, h5, h6
   :color = !h_text
