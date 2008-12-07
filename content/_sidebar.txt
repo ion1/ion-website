@@ -9,6 +9,8 @@ dirty:  true
       = link_to_page_unless_current :filename => 'index', :in_directory => '/'
     %li<
       = link_to_page_unless_current :filename => 'music', :in_directory => '/'
+    %li<
+      = link_to_page_unless_current :filename => 'contact', :in_directory => '/'
 
   ~ content_for :sidebar
 
