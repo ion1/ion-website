@@ -6,11 +6,11 @@ sass_options:
   :style: :expanded
 ---
 
-!color_neg  = white - #131
-!h_text     = white - !color_neg
-!box_bg     = white - !color_neg / 8
-!box_text   = white - !color_neg * 0.9
-!small_text = white - !color_neg / 2
+!color      = #151
+!h_text     = !color
+!box_bg     = white*0.90 + !color*0.10
+!box_text   = white*0.10 + !color*0.90
+!small_text = white*0.50 + !color*0.50
 
 h1
   a:link, a:visited, a:hover, a:focus, a:active
