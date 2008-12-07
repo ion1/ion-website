@@ -3,6 +3,7 @@ extension: html
 filter:
   - haml
   - basepath
+  - tidy
 dirty:     true
 haml_options:
   :format: :html4

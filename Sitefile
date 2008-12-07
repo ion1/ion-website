@@ -1,5 +1,6 @@
 SITE.base = 'http://johan.kiviniemi.name'
 SITE.priority = 0.5
+SITE.tidy_options = '-utf8 -wrap 0 --tidy-mark false --doctype strict'
 
 task :default => :build
 
