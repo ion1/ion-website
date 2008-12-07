@@ -17,7 +17,7 @@ You have entered Ion’s website. You are likely to be eaten by a grue.
 
 * [My bookmarks](http://del.icio.us/jki)
 
-### Recent blag entries
+## Recent blag entries
 
 <% pages = @pages.find :limit => 5,
                        :in_directory => 'blag',
