@@ -9,7 +9,19 @@ filter:
 
 These are work in progress.
 
-* [Tuhannen tulimmaista – Tavarapaljouden onnea (preview 1)](tuhannen_tulimmaista/tuhannen_tulimmaista-tavarapaljouden_onnea-prev1.ogg) (Vorbis, 5.6M)
-* [Ion – Delusions of Grand Piano](ion-delusions_of_grand_piano.ogg) (Vorbis, 3.0M) ([video](http://www.youtube.com/watch?v=qZBXA4ye_us&fmt=18))
-* [Ion – Schizophrenia (preview 1)](ion-schizophrenia-prev1.ogg) (Vorbis, 3.6M)
-* [Ion – Happo (preview 0)](ion-happo-prev0.ogg) (Vorbis, 7.8M)
+*   [Tuhannen tulimmaista – Tavarapaljouden onnea (preview 1)](tuhannen_tulimmaista/tuhannen_tulimmaista-tavarapaljouden_onnea-prev1.ogg) (Vorbis, 5.6M)
+
+    Finnish hip-hop. Vocals: Samuli, instruments: Ion, composed by Samuli and Ion.
+
+*   [Ion – Delusions of Grand Piano](ion-delusions_of_grand_piano.ogg) (Vorbis, 3.0M) ([video](http://www.youtube.com/watch?v=qZBXA4ye_us&fmt=18))
+
+    I originally composed this as a progressive metal song, but then arranged it for piano. I want to record the progressive metal version as well some day.
+
+*   [Ion – Schizophrenia (preview 1)](ion-schizophrenia-prev1.ogg) (Vorbis, 3.6M)
+
+    I originally composed this as a metal song, but then arranged it for piano. This version is played poorly; I’ll try to get around to recording it again.
+
+*   [Ion – Happo (preview 0)](ion-happo-prev0.ogg) (Vorbis, 7.8M)
+
+    Bzzz.
+
