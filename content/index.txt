@@ -17,19 +17,20 @@ You have entered Ion’s website. You are likely to be eaten by a grue.
 
 * [My bookmarks](http://del.icio.us/jki)
 
-## Recent blag entries
+### Recent blag entries
 
+<ul>
 <% pages = @pages.find :limit => 5,
                        :in_directory => 'blag',
                        :sort_by => :created_at,
                        :reverse => true
    pages.each do |p|
 -%>
-<div class="box">
-  <h3><a href="<%= h p.url %>"><%= h p.title %></a></h3>
-  <% if p.created_at -%>
-    <p class="small"><%= p.created_at.strftime('%Y-%m-%d') %></p>
-  <% end -%>
-  <%= render(p) %>
-</div>
+  <li>
+    <a href="<%= h p.url %>"><%= h p.title %></a>
+    <% if p.created_at -%>
+      <span class="small">(<%= p.created_at.strftime('%Y-%m-%d') %>)</p>
+    <% end -%>
+  </li>
 <% end -%>
+</ul>
