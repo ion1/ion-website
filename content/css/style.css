@@ -20,6 +20,15 @@ h1
 h1, h2, h3, h4, h5, h6
   :color = !h_text
 
+a:link
+  :color blue
+a:visited
+  :color navy
+a:hover,
+a:focus,
+a:active
+  :color red
+
 #sidebar
   ul, li
     :margin  0
