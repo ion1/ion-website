@@ -5,6 +5,7 @@ filter:
   - erb
   - markdown
 dirty:      true
+priority:   1.0
 
 openid:               "http://ion.openid.heh.fi/"
 openid_server:        "http://www.myopenid.com/server"
