@@ -14,15 +14,15 @@ Olin ollut kuukausia aiemmin kyseisessä firmassa kesätöissä. Yritän mietti�
 
 Lyhyen tauon jälkeen vastaan, etten kyllä keksi.
 
-Soittaja ilmoittaa, että olen murtautunut heidän palvelimeensa ja asentanut [rootkitin][rootkit]. Ahaa. En tiennytkään tehneeni moista. Hänellä on kuulemma varmat todisteet teostani. Pyydän päästä juttelemaan kasvokkain jonkun kanssa paikan päällä, ja sovimme niin.
+Soittaja väittää, että olen murtautunut heidän palvelimeensa ja asentanut [rootkitin][rootkit]. En tiennytkään tehneeni moista. Hänellä on kuulemma varmat todisteet teostani. Pyydän päästä juttelemaan kasvokkain jonkun kanssa paikan päällä, ja sovimme niin.
 
 [rootkit]: http://en.wikipedia.org/wiki/Rootkit
 
-Tapaan sovittuna ajankohtana puhelinyhtiöllä henkilön, jonka alaisuudessa olin toiminut kesätyöjaksona. Kerron hänelle, etten ole tehnyt väitettyä tietomurtoa, eikä minulla ole mitään motivaatiota tehdä sellaista. Hän näyttää uskovan minua. Saan kuulla heidän havainneen, että koneelle oli murtauduttu – muistaakseni sitä oli käytetty roskapostin lähettämiseen. Hyvänen aika, minähän vihaan spämmiä sydämeni pohjasta.
+Tapaan sovittuna ajankohtana puhelinyhtiöllä henkilön, jonka alaisuudessa olin toiminut kesätyöjaksona. Kerron hänelle, etten ole tehnyt väitettyä tietomurtoa, eikä minulla ole mitään motivaatiota tehdä sellaista. Hän näyttää uskovan minua. Saan kuulla heidän havainneen, että koneelle oli murtauduttu – muistaakseni sitä oli käytetty roskapostin lähettämiseen. Minähän vihaan spämmiä sydämeni pohjasta.
 
 Saan myös kuulla, että heillä on sopimus erään toisen firman kanssa: kyseinen firma ylläpitää heidän palvelimiaan hoitaen tietoturvapäivitykset ymv. He olivat vieneet saastuneen koneen ko. firmalle tutkittavaksi ja sieltä oli ilmoitettu, että tunnus `johkiv` oli tietomurron takana.
 
-Haa! Muistan, että jossain vaiheessa kesätyöjaksoa minulle oli tehty tunnus heidän nimipalvelimelleen työtehtävää varten. En ollut muistanut koko tunnuksen olemassaoloa. (Ihmettelen myös, miksi tunnusta ei oltu poistettu palvelimelta työn tehtyäni.)
+Muistan, että jossain vaiheessa kesätyöjaksoa minulle oli tehty tunnus heidän nimipalvelimelleen työtehtävää varten. En ollut muistanut koko tunnuksen olemassaoloa. (Ihmettelen myös, miksi tunnusta ei oltu poistettu palvelimelta työn tehtyäni.)
 
 Miettiessäni, miksi koneen tutkineesta firmasta väitettäisiin, että *minä* olisin murtautumisen takana, seuraavat mahdollisuudet tulevat mieleen:
 
