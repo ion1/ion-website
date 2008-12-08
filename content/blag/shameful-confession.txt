@@ -13,5 +13,5 @@ Here’s [my profile][].
 [facepoop]:   http://www.facebook.com/
 [my profile]: http://www.facebook.com/people/Johan_Kiviniemi/635104511
 
-<p><a href="http://www.facebook.com/people/Johan_Kiviniemi/635104511" title="My Facebook profile"><img src="http://badge.facebook.com/badge/635104511.130.444689305.png" style="border: 0" alt="My Facebook profile"></a></p>
+<p><a href="http://www.facebook.com/people/Johan_Kiviniemi/635104511" title="My Facebook profile"><img src="http://badge.facebook.com/badge/635104511.130.444689305.png" alt="My Facebook profile"></a></p>
 
