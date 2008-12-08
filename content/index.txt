@@ -34,3 +34,8 @@ You have entered Ion’s website. You are likely to be eaten by a grue.
   </li>
 <% end -%>
 </ul>
+
+### This week I ’ave been mostly listening to...
+
+<a href="http://www.last.fm/user/hapanvelli/"><img src="http://imagegen.last.fm/basicrt10/artists/hapanvelli.gif" alt="My music statistics"></a>  
+
