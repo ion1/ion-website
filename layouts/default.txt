@@ -31,7 +31,7 @@ haml_options:
       #hd
         %p.hidden<
           %a{ :href => "#navigation" }<
-            Navigation
+            Skip to navigation
       #bd
         #yui-main
           .yui-b
@@ -49,6 +49,8 @@ haml_options:
               = %Q{var disqus_url = "#{@page.old_url || SITE.base + @page.url}";}
             %script{ :src => "http://disqus.com/forums/ion/embed.js", :type => "text/javascript" }
             %noscript<
+              %h3<
+                Discussion
               %p<
                 %a{ :href => "http://ion.disqus.com/?url=ref" }<
                   View the discussion thread.
