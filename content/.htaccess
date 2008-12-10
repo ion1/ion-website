@@ -26,7 +26,7 @@ RewriteRule	^software/apt-mark-sync		https://launchpad.net/apt-mark-sync		[R=tem
          url = url.dup
          if url.sub! %r{^#{Webby.site.base}/*}, ''
 -%>
-RewriteRule     ^<%= url %>$  <%= Webby.site.base+p.url %>  [R=permanent,L]
+RewriteRule     ^<%= Regexp.escape(url) %>$  <%= Webby.site.base+p.url %>  [R=permanent,L]
 <%       end
        end
      end
