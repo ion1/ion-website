@@ -55,7 +55,7 @@ a:active
   :-moz-border-radius    1em
   :-webkit-border-radius 1em
 
-pre
+pre, code
   :color            = !box_text
   :background-color = !box_bg
 
