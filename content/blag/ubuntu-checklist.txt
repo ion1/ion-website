@@ -1,0 +1,58 @@
+---
+title:      My Ubuntu installation checklist
+created_at: 2008-12-14 00:13:52.696310 +02:00
+filter:
+  - erb
+  - markdown
+---
+1.  **Language packs**
+
+    Make sure the language packs are fully installed.
+
+1.  **Fonts**
+
+    Switch to [sharp font rendering](<%= h url_for_page(:name => 'ubuntu-fonts') %>).
+
+1.  **Enable universe etc.**
+
+1.  **Enable Medibuntu**
+
+        % sudo wget -O /etc/apt/sources.list.d/medibuntu.list \
+            http://www.medibuntu.org/sources.list.d/intrepid.list
+        % sudo apt-get update && \
+            sudo apt-get install medibuntu-keyring && \
+            sudo apt-get update
+
+1.  **Optionally install restricted stuff**
+
+    `% sudo apt-get install ubuntu-restricted-extras libdvdcss2 w32codecs`
+
+1.  **Install smart-notifier**
+
+    * `% sudo apt-get install --no-install-recommends smart-notifier`
+    * Enable smartd in `/etc/default/smartmontools`
+
+1.  **Install ntp support**
+
+    *   `% sudo apt-get install ntp`
+    *   /etc/ntp.conf: `server ntp.tdc.fi iburst`
+    *   /etc/dhcp3/dhclient.conf: `request ntp-servers`
+
+1.  **Make sure the HDD isn’t doing constant power cycles**
+
+    [Bug #59695](http://launchpad.net/bugs/59695)
+
+1.  **Make the on-startup partition checks less frequent**
+
+    `% sudo tune2fs -c 0 -i 180d /dev/...`
+
+    When the HDD breaks down, I’ll just consult the backups.
+
+1.  **Add Tampere to the Gnome clock/calendar/weather applet.**
+
+1.  **Switch Totem to the xine backend**
+
+    `% sudo apt-get install totem-xine totem-gstreamer-`
+
+    ...as long as DVD menus are [broken](http://launchpad.net/bugs/41335) with the gstreamer backend
+
