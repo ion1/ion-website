@@ -52,7 +52,7 @@ haml_options:
               %h3<
                 Discussion
               %p<
-                %a{ :href => "http://ion.disqus.com/?url=ref" }<
+                %a{ :href => "http://ion.disqus.com/?url=#{@page.old_url || SITE.base + @page.url}" }<
                   View the discussion thread.
         #sidebar.yui-b
           ~ render :partial => '/sidebar'
