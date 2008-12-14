@@ -46,7 +46,8 @@ haml_options:
             ~ @content
             #disqus_thread
             %script{ :type => "text/javascript" }<
-              = %Q{var disqus_url = "#{@page.old_url || SITE.base + @page.url}";}
+              = "var disqus_url = %s;" % (@page.old_url || SITE.base + @page.url).to_json
+              = "var disqus_title = %s;" % @page.title.to_json
             %script{ :src => "http://disqus.com/forums/ion/embed.js", :type => "text/javascript" }
             %noscript<
               %h3<
