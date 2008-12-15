@@ -29,8 +29,8 @@ filter:
 
 1.  **Install smart-notifier**
 
-    * `% sudo apt-get install --no-install-recommends smart-notifier`
-    * Enable smartd in `/etc/default/smartmontools`
+    *   `% sudo apt-get install --no-install-recommends smart-notifier`
+    *   Enable smartd in `/etc/default/smartmontools`
 
 1.  **Install ntp support**
 
@@ -38,9 +38,25 @@ filter:
     *   /etc/ntp.conf: `server ntp.tdc.fi iburst`
     *   /etc/dhcp3/dhclient.conf: `request ntp-servers`
 
-1.  **Make sure the HDD isn’t doing constant power cycles**
+1.  **Make sure the HDD isn’t doing constant load cycles**
 
     [Bug #59695](http://launchpad.net/bugs/59695)
+
+    To verify the load cycle rate, run `sudo smartctl -A /dev/sda | grep Load_Cycle_Count` twice with a delay of, say, an hour.
+
+    On various Thinkpads the fix seems to be to enable laptop-mode in /etc/default/acpi-support, and to set the following in /etc/laptop-mode/laptop-mode.conf:
+
+        CONTROL_HD_IDLE_TIMEOUT=1
+
+        LM_BATT_HD_IDLE_TIMEOUT_SECONDS=60
+        LM_AC_HD_IDLE_TIMEOUT_SECONDS=7200
+        NOLM_HD_IDLE_TIMEOUT_SECONDS=7200
+
+        CONTROL_HD_POWERMGMT=1
+
+        BATT_HD_POWERMGMT=128
+        LM_AC_HD_POWERMGMT=254
+        NOLM_AC_HD_POWERMGMT=254
 
 1.  **Make the on-startup partition checks less frequent**
 
@@ -48,7 +64,7 @@ filter:
 
     When the HDD breaks down, I’ll just consult the backups.
 
-1.  **Add Tampere to the Gnome clock/calendar/weather applet.**
+1.  **Add Tampere, Finland to the Gnome clock/calendar/weather applet.**
 
 1.  **Switch Totem to the xine backend**
 
