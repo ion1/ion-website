@@ -15,7 +15,7 @@ filter:
 
 1.  **Enable universe etc.**
 
-1.  **Enable Medibuntu**
+1.  **Enable [Medibuntu](http://medibuntu.org/)**
 
         % sudo wget -O /etc/apt/sources.list.d/medibuntu.list \
             http://www.medibuntu.org/sources.list.d/intrepid.list
