@@ -60,4 +60,8 @@ haml_options:
       #ft.small
         %p<
           = "© #{Time.now.year} <cite>Johan Kiviniemi</cite>"
+        %p<
+          The image of a giraffe is from
+          %a{ :href => "http://commons.wikimedia.org/wiki/File:Giraffe_standing.jpg" }<
+            Wikimedia Commons
         ~ content_for :footer
