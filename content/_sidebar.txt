@@ -14,11 +14,6 @@ dirty:  true
 
   ~ content_for :sidebar
 
-  %h2 Facepoop
-  %p{ :style => "text-align: center" }<
-    %a{ :href => "http://www.facebook.com/people/Johan_Kiviniemi/635104511", :title => "My Facebook profile" }<
-      %img{ :src => "http://badge.facebook.com/badge/635104511.130.444689305.png", :alt => "My Facebook profile" }
-
   %h2 Blag entries
   %ul
     - posts = @pages.find :all, :directory => 'blag', :sort_by => :created_at, :reverse => true
