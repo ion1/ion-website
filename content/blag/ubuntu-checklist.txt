@@ -64,6 +64,12 @@ filter:
 
     When the HDD breaks down, I’ll just consult the backups.
 
+1.  **Make the on-startup partition check repair errors without asking**
+
+    It’s not as if I’d choose “no” when it asks about it.
+
+    /etc/default/rcS: `FSCKFIX=yes`
+
 1.  **Add Tampere, Finland to the Gnome clock/calendar/weather applet.**
 
 1.  **Switch Totem to the xine backend**
