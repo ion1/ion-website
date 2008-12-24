@@ -1,0 +1,14 @@
+---
+title:      New “creating a weblog in 15 minutes with Rails” video
+created_at: 2008-12-24 05:04:33.762140 +02:00
+filter:
+  - markdown
+---
+
+There’s a [new version of the “creating a weblog in 15 minutes with Rails” video][video] on the [Ruby on Rails website][rails].
+
+[video]: http://media.rubyonrails.org/video/rails_blog_2.mov
+[rails]: http://rubyonrails.org/screencasts
+
+> “In 15 minutes, we go from scratch to complete weblog engine with comments, ajax, an ATOM feed, an XML and JSON API, tests, an administrative interface, and much more!”
+
