@@ -1,0 +1,17 @@
+---
+title:      "XMoto: private room guide"
+created_at: 2008-12-24 22:37:38.734982 +02:00
+filter:
+  - markdown
+---
+This is a short guide I give to people I give access to an XMoto private room.
+
+To view the high scores or change your password, hit “[Private rooms][rooms]” on the [XMoto website][xmoto], choose the room and log in.
+
+[rooms]: http://xmoto.tuxfamily.org/index.php?page=all_rooms
+[xmoto]: http://xmoto.tuxfamily.org/
+
+In the game, choose Options → WWW → Room 2 (I recommend leaving WR as the Reference room), activate the checkbox, select the room and input your credentials. Hit “Upload all highscores” to do a bulk upload.
+
+Immediately after playing a level, you can hit “Upload” if you beat the current high score.
+
