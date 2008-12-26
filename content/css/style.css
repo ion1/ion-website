@@ -26,16 +26,21 @@ h1, h2, h3, h4, h5, h6
   :color = !h_text
 
 /* http://www.mezzoblue.com/tests/revised-image-replacement/
-h1
-  :text-indent         -5000px
-  :background-image    url(/css/heading.png)
-  :background-repeat   no-repeat
-  :background-position 0 0
-  :height              173px
+@media screen
+  h1
+    :text-indent         -5000px
+    :background-image    url(/css/heading.png)
+    :background-repeat   no-repeat
+    :background-position 0 0
+    :height              173px
 
-  a
-    :display block
-    :height  173px
+    a
+      :display block
+      :height  173px
+
+@media print
+  #sidebar, #disqus_thread
+    :display none
 
 a:link
   :color blue
