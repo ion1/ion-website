@@ -1,0 +1,15 @@
+---
+title:      Weight tracker
+created_at: 2008-12-27 23:25:29.884344 +02:00
+filter:
+  - markdown
+---
+A side effect of a drug caused me to gain weight. Now that I’m off the drug, I’ll try to lose some of it. :-)
+
+I wrote a small program to track my weight. [Get it here][github].
+
+[My weight, as plotted by it][weight].
+
+[github]: http://github.com/ion1/weight-tracker
+[weight]: http://johan.kiviniemi.name/weight
+
