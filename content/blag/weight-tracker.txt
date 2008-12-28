@@ -8,8 +8,9 @@ A side effect of a drug caused me to gain weight. Now that I’m off the drug, I
 
 I wrote a small program to track my weight. [Get it here][github].
 
-[My weight, as plotted by it][weight].
-
 [github]: http://github.com/ion1/weight-tracker
-[weight]: http://johan.kiviniemi.name/weight
+
+My weight, as plotted by it: (the graph will get more data as time passes)
+
+<p><a href="http://johan.kiviniemi.name/weight"><img src="http://johan.kiviniemi.name/weight" alt="weights" style="width: 100%;"></a></p>
 
