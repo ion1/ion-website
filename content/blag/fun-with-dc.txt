@@ -17,12 +17,12 @@ ASCII [Mandelbrot][]:
 
 [Quine][]:
 
-[quine]: http://en.wikipedia.org/wiki/Quine_%28computing%29
+[quine]: http://en.wikipedia.org/wiki/Quine_(computing)
 
     [91PP[dx]93PP]dx
 
 ([dc][] is an [RPN][] calculator. It’s one of the oldest Unix utilities.)
 
-[dc]:  http://en.wikipedia.org/wiki/Dc_%28Unix%29
+[dc]:  http://en.wikipedia.org/wiki/Dc_(Unix)
 [rpn]: http://en.wikipedia.org/wiki/Reverse_Polish_notation "Reverse Polish notatiton"
 

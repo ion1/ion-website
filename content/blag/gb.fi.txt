@@ -17,7 +17,7 @@ Tietokonemuistin, kuten [keskusmuistin][ram] ja [kiintolevytilan][harddisk], mä
 
 [ram]:      http://fi.wikipedia.org/wiki/Keskusmuisti
 [harddisk]: http://fi.wikipedia.org/wiki/Kiintolevy
-[byte]:     http://fi.wikipedia.org/wiki/Tavu_%28tietotekniikka%29
+[byte]:     http://fi.wikipedia.org/wiki/Tavu_(tietotekniikka)
 
 Pitkään tämä riitti, mutta viime aikoina tulleiden uusien teknologioiden myötä tilanne on muuttunut.
 
