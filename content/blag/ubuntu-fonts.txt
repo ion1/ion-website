@@ -6,6 +6,10 @@ filter:
   - markdown
 ---
 
+**News**: Martin Ankerl posted [screenshots comparing the font renderers][screenshots].
+
+[screenshots]: http://martin.ankerl.com/2009/01/22/beautiful-font-hinting-in-ubuntu-810/
+
 If you’re like me and hate the blurry font rendering used by default in Ubuntu since 8.04 (hardy), you might want to install the following config files:
 
 ### /etc/fonts/conf.d/99-sharp-fonts.conf
@@ -43,6 +47,4 @@ Again, change `lcdlegacy` to `lcdfilterlegacy` if you’re running 8.04.
 The default font renderer draws **translucent** subpixels – a.k.a. blur – around vertical lines. That makes text less readable.
 
 The legacy renderer draws all horizontal and vertical lines without any translucent pixels/subpixels. Only oblique lines and curves are rendered with antialiasing. That means the text is as sharp as possible with the display technology.
-
-I might post a better explanation with screenshots in the future.
 
