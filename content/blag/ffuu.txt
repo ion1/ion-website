@@ -1,0 +1,35 @@
+---
+title:      FFUU
+created_at: 2009-02-08 04:34:44.960522 +02:00
+filter:
+  - erb
+  - markdown
+---
+
+<% content_for :head do -%>
+<link href="ffuu.css" rel="stylesheet" type="text/css">
+<script src="ffuu.js" type="text/javascript"></script>
+<% end -%>
+
+You all have seen [the][1] [plethora][2] [of][3] [comic][4] [strips][5] featuring the hand-drawn angry face beginning to shout “FUN!”
+
+[1]: http://www.epicrage.org/wp-content/uploads/2009/01/no_step.jpg
+[2]: http://apina.biz/12464.png
+[3]: http://www.epicrage.org/wp-content/uploads/2008/09/mario.jpg
+[4]: http://www.epicrage.org/wp-content/uploads/2008/09/shhhh.jpg
+[5]: http://heh.fi/tmp/presidential_snowball
+
+<p style="text-align: center;"><img src="ffuu.png" alt="FFUU"></p>
+
+The train of thought to the following should be obvious.
+
+I did something useful for once: a graph of the number of Google results for words with various amounts of the letter F and various amounts of the letter U.
+
+Enjoy:
+
+<div id="ffuu-container"><p>Loading... (JavaScript support required, sorry.)</p></div>
+
+What have we learned? Nothing really.
+
+The diagonal lines are interesting, though.
+

@@ -1,0 +1,29 @@
+---
+extension: css
+filter:    sass
+layout:    nil  # no layout
+sass_options:
+  :style: :expanded
+---
+#ffuu-table
+  :font-size       70%
+  :border-collapse collapse
+
+  th, td
+    :width   1.3em
+    :border  none
+    :margin  0
+    :padding 0
+
+  tr.top
+    th
+      :vertical-align top
+
+  tr.data
+    th
+      :text-align right
+
+  a
+    :text-decoration none
+    :display         block
+
