@@ -3,8 +3,16 @@ title: Ananasmurska – Excellence™
 created_at: 2006-12-25 22:48:27 +02:00
 old_url: http://johan.kiviniemi.name/blag/2006/12/26/excellence/
 filter:
+  - erb
   - markdown
 ---
+
+<% content_for :head do -%>
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2/swfobject.js" type="text/javascript"></script>
+<script type="text/javascript">
+  swfobject.embedSWF ("http://www.youtube.com/v/_whSnPErl7c", "video", 425, 356, "6");
+</script>
+<% end -%>
 
 [Felor][] kindly captured a video of the realtime Excel™ demo Excellence™ by [Ananasmurska][].
 
@@ -15,22 +23,12 @@ The demo placed 1st in the BASIC demo competition at [Alternative Party][] 2004.
 
 [alternative party]: http://altparty.org/
 
-Stream the video at [Google Video][] or [download][] it.
+Stream the video at [YouTube][] or [download][] it.
 
-[google video]: http://video.google.com/videoplay?docid=-8670463511478827246
-[download]:     http://soijabanaani.net/tmp/ananasmurska/ananasmurska-excellence.avi
+[youtube]:  http://www.youtube.com/watch?v=_whSnPErl7c
+[download]: http://soijabanaani.net/tmp/ananasmurska/ananasmurska-excellence.avi
 
-<!--[if !IE]> -->
-<object type="application/x-shockwave-flash"
-  data="http://video.google.com/googleplayer.swf?docId=-8670463511478827246" width="400" height="326">
-<!-- <![endif]-->
-<!--[if IE]>
-<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
-  width="400" height="326">
-  <param name="movie" value="http://video.google.com/googleplayer.swf?docId=-8670463511478827246" />
-<!--><!---->
+<div id="video">
   <p>Your browser doesn't seem to support the embedded video player. Click the link above to download the video.</p>
-</object>
-<!-- <![endif]-->
+</div>
 
