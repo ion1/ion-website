@@ -25,6 +25,9 @@ It looks pretty much like this:
       bodytext: 'This website is full of awesome!'
     });
 
+    // Load Google Analytics.
+    $.loadGoogleAnalytics ('UA-0123456-1');
+
 [Download the plugin][get], or see it in use by viewing the source of this webpage or [my Heroes page][heroes].
 
 [get]:    http://heh.fi/jquery/
