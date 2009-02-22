@@ -105,3 +105,23 @@ pre, code
   ul li
   li.search-goog
     :display block
+
+/* The last.fm chart
+#lastfm-chart
+  th, td
+    :border  none
+    :margin  0
+    :padding 0 0.5em
+
+  td.playcount
+    :text-align right
+
+  thead
+    :background-color #ada
+    :border-bottom    1px
+
+  tbody
+    .odd
+      :background-color #dfd
+    .even
+

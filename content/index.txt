@@ -11,6 +11,11 @@ openid:               "http://ion.openid.heh.fi/"
 openid_server:        "http://www.myopenid.com/server"
 openid_xrds_location: "http://www.myopenid.com/xrds?username=ion.openid.heh.fi"
 ---
+
+<% content_for :head do -%>
+<script src="js/lastfm-chart.js" type="text/javascript"></script>
+<% end -%>
+
 You have entered Ion’s website. You are likely to be eaten by a grue.
 
 ### Stuff
@@ -37,5 +42,7 @@ You have entered Ion’s website. You are likely to be eaten by a grue.
 
 ### This week I ’ave been mostly listening to...
 
-<a href="http://www.last.fm/user/hapanvelli/"><img src="http://imagegen.last.fm/basicrt10/artists/hapanvelli.gif" alt="My music statistics"></a>  
+<div id="lastfm">
+  <p><a href="http://www.last.fm/user/hapanvelli/">The JavaScript chart didn’t load, but you’ll find my listening habits behind this link.</a></p>
+</div>
 
