@@ -16,6 +16,15 @@ Currently supported services:
 *   Disqus (the forum thread for your webpage)
 *   Google Analytics (the tracking code)
 
+It looks pretty much like this:
+
+    // Find the element with id=digg and replace its contents (if any) with the
+    // “digg it” button.
+    $('#digg').loadDigg ({
+      title:    'My awesome website',
+      bodytext: 'This website is full of awesome!'
+    });
+
 [Download the plugin][get], or see it in use by viewing the source of this webpage or [my Heroes page][heroes].
 
 [get]:    http://heh.fi/jquery/
