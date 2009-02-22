@@ -33,6 +33,7 @@ haml_options:
       = "  $('#disqus').loadDisqus ('ion', { url: %s, title: %s });" % [ (@page.old_url || SITE.base + @page.url).to_json, @page.title.to_json ]
       = "  $.loadGoogleAnalytics ('UA-7569188-1');"
       = "});"
+    ~ content_for :head
   %body
     #doc2.yui-t5
       #hd
