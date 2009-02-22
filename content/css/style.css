@@ -12,6 +12,12 @@ sass_options:
 !box_text   = white*0.10 + !color*0.90
 !small_text = white*0.50 + !color*0.50
 
+/* Revert changes by the YUI CSS.
+pre, code, kbd, samp, tt
+  :line-height inherit
+body
+  :margin 0
+
 body
   :background-image    url(/css/gradient.png)
   :background-repeat   repeat-x
