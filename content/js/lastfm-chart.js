@@ -9,6 +9,12 @@ table.append ('<thead><tr><th class="playcount" title="Play count">#</th><th cla
 $.getJSON (uri, function (data) {
   var chart = data.value.items[0].weeklyartistchart.artist;
 
+  // If there’s only a single item, Yahoo Pipes doesn’t seem to wrap it in an
+  // array.
+  if (typeof chart.length === 'undefined') {
+    chart = [chart];
+  }
+
   var tbody = $('<tbody/>').appendTo (table);
 
   for (var i = 0; i < chart.length; i++) {
