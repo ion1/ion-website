@@ -20,10 +20,7 @@ It looks pretty much like this:
 
     // Find the element with id=digg and replace its contents (if any) with the
     // “digg it” button.
-    $('#digg').loadDigg ({
-      title:    'My awesome website',
-      bodytext: 'This website is full of awesome!'
-    });
+    $('#digg').loadDigg ();
 
     // Load Google Analytics.
     $.loadGoogleAnalytics ('UA-0123456-1');
