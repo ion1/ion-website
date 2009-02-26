@@ -3,7 +3,7 @@
 
 var uri = 'http://pipes.yahoo.com/pipes/pipe.run?_id=3nXqp_cA3hGbkiSWBB50VA&_render=json&_callback=?';
 
-var table = $('<table id="lastfm-chart"/>');
+var table = $('<table id="lastfm-table"/>');
 table.append ('<thead><tr><th class="playcount" title="Play count">#</th><th class="artist">Artist</th></tr></thead>');
 
 $.getJSON (uri, function (data) {

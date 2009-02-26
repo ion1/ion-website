@@ -106,7 +106,7 @@ pre, code
   li.search-goog
     :display block
 
-#lastfm-chart, #github-table
+#lastfm-table, #github-table
   th, td
     :border  none
     :margin  0
