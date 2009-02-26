@@ -1,16 +1,21 @@
 /*global jQuery*/
 (function ($) {
 
-var uri = 'http://pipes.yahoo.com/pipes/pipe.run?_id=3nXqp_cA3hGbkiSWBB50VA&_render=json&_callback=?';
+function yql_uri (expr) {
+  return "http://query.yahooapis.com/v1/public/yql?q=" +
+         encodeURIComponent (expr) +
+         "&diagnostics=false&format=json&callback=?"
+}
+
+var expr = 'select * from json where url="http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=hapanvelli&api_key=204ecfee11b8db29a0266442351bd4b8&format=json"';
 
 var table = $('<table id="lastfm-table"/>');
 table.append ('<thead><tr><th class="playcount" title="Play count">#</th><th class="artist">Artist</th></tr></thead>');
 
-$.getJSON (uri, function (data) {
-  var chart = data.value.items[0].weeklyartistchart.artist;
+$.getJSON (yql_uri (expr), function (data) {
+  var chart = data.query.results.weeklyartistchart.artist;
 
-  // If there’s only a single item, Yahoo Pipes doesn’t seem to wrap it in an
-  // array.
+  // If there’s only a single item, YQL doesn’t seem to wrap it in an array.
   if (typeof chart.length === 'undefined') {
     chart = [chart];
   }
