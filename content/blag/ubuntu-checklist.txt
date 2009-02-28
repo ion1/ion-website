@@ -25,7 +25,7 @@ filter:
 
 1.  **Optionally install restricted stuff**
 
-    `% sudo apt-get install ubuntu-restricted-extras libdvdcss2 w32codecs`
+    `% sudo apt-get install non-free-codecs libdvdcss2`
 
 1.  **Install smart-notifier**
 
