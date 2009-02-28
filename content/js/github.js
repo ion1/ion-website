@@ -1,13 +1,24 @@
 /*global jQuery*/
 (function ($) {
 
-var uri = 'http://github.com/api/v1/json/ion1?callback=?';
+function yql_uri (expr) {
+  return "http://query.yahooapis.com/v1/public/yql?q=" +
+         encodeURIComponent (expr) +
+         "&diagnostics=false&format=json&callback=?"
+}
+
+var expr = 'select * from json where url="http://github.com/api/v1/json/ion1"';
 
 var table = $('<table id="github-table"/>');
 table.append ('<thead><tr><th class="name">Name</th><th class="description">Description</th><thead>');
 
-$.getJSON (uri, function (data) {
-  var repos = data.user.repositories;
+$.getJSON (yql_uri (expr), function (data) {
+  var repos = data.query.results.user.repositories;
+
+  // If there’s only a single item, YQL doesn’t seem to wrap it in an array.
+  if (typeof repos.length === 'undefined') {
+    repos = [repos];
+  }
 
   var tbody = $('<tbody/>').appendTo (table);
 
