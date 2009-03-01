@@ -130,3 +130,9 @@ pre, code
       :background-color #dfd
     .even
 
+  img
+    :width          22px
+    :height         22px
+    :vertical-align middle
+    :border         none
+
