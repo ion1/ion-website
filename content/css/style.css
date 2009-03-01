@@ -86,6 +86,9 @@ a:active
 #gravatar
   :text-align center
 
+  img
+    :border 2px solid black
+
 pre, code
   :color            = !box_text
   :background-color = !box_bg
