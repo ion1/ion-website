@@ -118,6 +118,9 @@ pre, code
     :margin  0
     :padding 0 0.5em
 
+  td.name
+    :white-space nowrap
+
   td.playcount
     :text-align right
 
