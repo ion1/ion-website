@@ -12,6 +12,9 @@ dirty:  true
     %li<
       = link_to_page_unless_current :filename => 'contact', :in_directory => '/'
 
+  #gravatar
+    %img{ :src => 'http://www.gravatar.com/avatar/6bffb93169abecf9e2590b9d338dd4cb?d=identicon', :alt => 'Gravatar' }
+
   ~ content_for :sidebar
 
   %h2 Blag entries
